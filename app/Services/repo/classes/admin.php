@@ -27,7 +27,7 @@ class admin implements adminInterface{
     }
     public function UpdateCodeByPhone($phone,$code){
 
-        $admin=ModelsAdmin::where("email",$code)->first();
+        $admin=ModelsAdmin::where("phone",$phone)->first();
         $admin->code=$code;
         $admin->save();
 

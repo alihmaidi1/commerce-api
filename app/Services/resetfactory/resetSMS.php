@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\reset;
+namespace App\Services\resetfactory;
 
 use App\Jobs\sendsms;
 use App\Services\repo\interfaces\adminInterface;

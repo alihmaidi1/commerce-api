@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services\resetfactory;
-use App\Services\reset\resetSMS;
+use App\Services\resetfactory\resetSMS;
 use Exception;
 
 
