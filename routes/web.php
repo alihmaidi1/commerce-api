@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Twilio\Rest\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    $client = new Client(env("TWILIO_SID"), env("TWILIO_SECRET"));
+    $client->messages->create("+963949363991", [
+        'from' => env("TWILIO_FROM"),
+        'body' => "hello from test mode"]);
+
     return view('welcome');
 });

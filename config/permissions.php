@@ -13,7 +13,10 @@ return [
     "currency",
     "copon",
     "role",
-    "tag"
+    "tag",
+    "property",
+    "country",
+    "city"
 
 
 
