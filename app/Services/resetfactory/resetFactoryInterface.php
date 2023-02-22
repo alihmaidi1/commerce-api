@@ -7,7 +7,8 @@ interface resetFactoryInterface{
 
 
 
-    public function getReset(int $type);
+    public function getReset(int $type,$admin);
+
 
 
 

@@ -8,7 +8,6 @@ use App\Http\Requests\password\resetmessage;
 use App\Services\repo\interfaces\adminInterface;
 use App\Services\resetfactory\resetFactory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class admin extends Controller
 {
@@ -54,16 +53,12 @@ class admin extends Controller
 
     public function getresetmessage(resetmessage $request){
 
-
-        // $reset=new resetFactory();
-        // $resetMothod=$reset->getReset($request->type);
-        // $resetMothod->send($request->source,);
-
-
-
-
-
-
+        $code =time().rand(100000,999999);
+        $reset=new resetFactory();
+        $resetMothod=$reset->getReset($request->type,$this->admin);
+        $admin=$resetMothod->send($request->source,$code);
+        $token=auth("reset_admin")->login($admin);
+        return response()->json(["token"=>$token],200);
 
 
 

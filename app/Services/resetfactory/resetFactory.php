@@ -9,14 +9,14 @@ use Exception;
 class resetFactory implements resetFactoryInterface{
 
 
-    public function getReset(int $type){
+    public function getReset(int $type,$admin){
 
         if($type==0){
 
-            return new resetEmail();
+            return new resetEmail($admin);
         }else if($type==1){
 
-            return new resetSMS();
+            return new resetSMS($admin);
         }
 
         throw new Exception("the type is not correct");

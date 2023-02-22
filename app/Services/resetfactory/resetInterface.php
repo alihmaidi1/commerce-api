@@ -6,7 +6,7 @@ namespace App\Services\resetfactory;
 interface resetInterface{
 
 
-    public function send($source);
+    public function send($source,$code);
 
 
 }
