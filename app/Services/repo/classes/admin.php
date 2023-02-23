@@ -4,7 +4,9 @@ namespace App\Services\repo\classes;
 
 use App\Models\admin as ModelsAdmin;
 use App\Services\repo\interfaces\adminInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 
 class admin implements adminInterface{
 
@@ -35,6 +37,24 @@ class admin implements adminInterface{
 
     }
 
+    public function ClearCode($code){
 
+        $admin=ModelsAdmin::where("code",$code)->firstOrFail();
+        $admin->code=null;
+        $admin->save();
+        return $admin;
+    }
+
+
+    public function changePassword($id,$password){
+
+        $admin=ModelsAdmin::findOrFail($id);
+        $admin->password=Hash::make($password);
+        $admin->save();
+        return $admin;
+
+
+
+    }
 
 }

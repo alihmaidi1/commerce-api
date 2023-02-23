@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\admin\changepassword;
 use App\Http\Requests\admin\login;
 use App\Http\Requests\admin\refreshtoken;
+use App\Http\Requests\admin\reset;
 use App\Http\Requests\password\resetmessage;
 use App\Services\repo\interfaces\adminInterface;
 use App\Services\resetfactory\resetFactory;
@@ -61,13 +63,34 @@ class admin extends Controller
         return response()->json(["token"=>$token],200);
 
 
+    }
 
 
+    public function verifiedcode(reset $request){
 
+        $code=$request->code;
+        $admin=$this->admin->ClearCode($code);
+        $token=$admin->createToken("reset")->accessToken;
+        auth("reset_admin")->logout();
+        return response()->json(["token"=>$token]);
 
 
     }
 
+
+    public function changepassword(changepassword $request){
+
+
+        $password=$request->password;
+        $id=auth("api")->user()->id;
+        auth("api")->user()->token()->revoke();
+        $admin=$this->admin->changePassword($id,$password);
+        $admin->tokens=tokenInfo($admin->email,$password,"admins");
+        return response()->json([$admin]);
+
+
+
+    }
 
 
 }
