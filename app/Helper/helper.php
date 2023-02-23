@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Image;
+use File;
 
 function tokenInfo($email,$password,$provider){
 
@@ -41,5 +43,37 @@ function refreshtoken($refreshtoken,$provider){
         return $token->json();
     }
     throw new Exception("the refresh token is not correct");
+
+}
+
+
+function storeResize($image,$name){
+
+
+    $image=Image::make($image);
+    $v1=$image->resize(200,300)->save(public_path("temp/v1/".$name),50);
+    $v2=$image->resize(500,700)->save(public_path("temp/v2/".$name),70);
+    $v3=$image->resize(1000,1200)->save(public_path("temp/v3/".$name),90);
+
+
+}
+
+
+function storeResizeImages($images,$temp){
+
+    $arr=[];
+    foreach($images as $image){
+
+        $name=time().rand(100000,999999).".".$image->extension();
+        $image=Image::make($image);
+        $v1=$image->resize(200,300)->save(public_path("temp/v1/".$name),50);
+        $v2=$image->resize(500,700)->save(public_path("temp/v2/".$name),70);
+        $v3=$image->resize(1000,1200)->save(public_path("temp/v3/".$name),90);
+        $arr[]=$temp->store($name);
+
+    }
+
+    return $arr;
+
 
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\currencyController;
+use App\Http\Controllers\imageController;
 
 Route::group(["prefix"=>"admin"],function(){
 
@@ -36,8 +37,7 @@ Route::group(["prefix"=>"admin"],function(){
 
     });
 
-
-
-
-
 });
+
+Route::post('uploadimage',[imageController::class,"uploadimage"]);
+Route::post('uploadimages',[imageController::class,"uploadimages"]);

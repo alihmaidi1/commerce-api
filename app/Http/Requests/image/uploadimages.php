@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\currency;
+namespace App\Http\Requests\image;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class storeRequest extends FormRequest
+class uploadimages extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,12 @@ class storeRequest extends FormRequest
     {
         return [
 
-            "code"=>"required|unique:currencies,code",
-            "name"=>"required|unique:currencies,name",
-            "value"=>"required|numeric"
-
+            "images"=>"required|array",
+            "images.*"=>"mimes:png,jpg,jpeg"
 
         ];
     }
+
     public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator){
 
         throw new HttpResponseException(

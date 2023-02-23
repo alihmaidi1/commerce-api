@@ -3,6 +3,7 @@
 namespace App\Http\Requests\currency;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class update extends FormRequest
 {
@@ -29,4 +30,15 @@ class update extends FormRequest
 
         ];
     }
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator){
+
+        throw new HttpResponseException(
+
+            response()->json(["data"=>[],"message"=>$validator->errors()->first()],401)
+
+        );
+
+
+    }
+
 }

@@ -2,14 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\currency;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
     /**
      * The path to the "home" route for your application.
      *
@@ -33,6 +36,15 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+        });
+
+        Route::bind("currency",function($value){
+
+            return Cache::rememberForever("currency:".$value,function() use($value){
+
+                return currency::findOrFail($value);
+            });
+
         });
     }
 
