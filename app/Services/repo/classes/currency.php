@@ -20,7 +20,7 @@ class currency implements currencyInterface{
         ]);
 
         Cache::pull("currencies");
-
+        Cache::put("currency:".$currency->id,$currency);
         return $currency;
     }
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\admin;
+namespace App\Http\Requests\banner;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class changepassword extends FormRequest
+class store extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class changepassword extends FormRequest
     {
         return [
 
-            "password"=>"required"
+            "image_id"=>"required|exists:temps,id",
+            "link"=>"required|url",
+            "status"=>"required|in:0,1",
+            "rank"=>"required|unique:banners,rank",
+            "show"=>"required|in:0,1,2"
 
         ];
     }
