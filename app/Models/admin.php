@@ -13,6 +13,9 @@ class admin extends Authenticatable implements JWTSubject
 {
     use HasFactory,HasUuids,HasApiTokens;
 
+
+    public $with=["role"];
+
     public $fillable=["name","email","password","phone"];
 
     public $hidden=["created_at","updated_at","role_id","password"];

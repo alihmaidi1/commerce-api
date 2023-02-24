@@ -17,7 +17,7 @@ class currencyController extends Controller
      public $currency;
     public function __construct(currencyInterface $currency){
 
-        $this->middleware("auth:api")->except(["index","show"]);
+        $this->middleware(["auth:api","can:currency"])->except(["index","show"]);
         $this->currency=$currency;
 
     }

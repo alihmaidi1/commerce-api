@@ -19,6 +19,7 @@ class sliderController extends Controller
      public $temp;
      public function __construct(sliderInterface $slider,tempInterface $temp){
 
+        $this->middleware(["auth:api","can:slider"])->except(["index","show"]);
         $this->slider=$slider;
         $this->temp=$temp;
      }
