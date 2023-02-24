@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\bannerController;
+use App\Http\Controllers\brandController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\currencyController;
 use App\Http\Controllers\imageController;
@@ -23,6 +24,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("slider",sliderController::class);
     Route::apiResource("banner",bannerController::class);
     Route::apiResource("category",categoryController::class);
+    Route::apiResource("brand",brandController::class);
 
 
 
