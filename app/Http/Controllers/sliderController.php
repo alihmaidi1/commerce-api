@@ -86,7 +86,7 @@ class sliderController extends Controller
         $image=$request->image_id;
         $rank=$request->rank;
         $status=$request->status;
-        $url=updateimage($image,$this->temp,"slider",$slider);
+        $url=updateimage($image,$this->temp,"slider",$slider,"url");
         $slider=$this->slider->update($slider,$url,$rank,$status);
         return response()->json($slider);
 

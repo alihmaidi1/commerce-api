@@ -93,7 +93,7 @@ class bannerController extends Controller
         $status=$request->status;
         $link=$request->link;
         $show=$request->show;
-        $url=updateimage($image,$this->temp,"banner",$banner);
+        $url=updateimage($image,$this->temp,"banner",$banner,"url");
         $banner=$this->banner->update($banner,$url,$status,$rank,$link,$show);
         return response()->json($banner);
 

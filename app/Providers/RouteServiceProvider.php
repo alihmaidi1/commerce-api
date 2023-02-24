@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\banner;
+use App\Models\category;
 use App\Models\currency;
 use App\Models\slider;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -64,6 +65,16 @@ class RouteServiceProvider extends ServiceProvider
             return Cache::rememberForever("banner:".$value,function() use($value){
 
                 return banner::findOrFail($value);
+            });
+
+        });
+
+
+        Route::bind("category",function($value){
+
+            return Cache::rememberForever("category:".$value,function() use($value){
+
+                return category::findOrFail($value);
             });
 
         });

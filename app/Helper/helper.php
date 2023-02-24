@@ -97,7 +97,7 @@ function storeResizeImages($images,$temp){
 }
 
 
-function updateimage($image_id,$temp,$to,$object){
+function updateimage($image_id,$temp,$to,$object,$name){
 
 
     if($image_id!=null){
@@ -105,6 +105,9 @@ function updateimage($image_id,$temp,$to,$object){
         $url=$temp->getTemp($image_id)->getRawOriginal("url");
         MoveFile($url,"temp",$to);
         $temp->remove($image_id);
+        unlink(public_path($to."/v1/".$object->getRawOriginal($name)));
+        unlink(public_path($to."/v2/".$object->getRawOriginal($name)));
+        unlink(public_path($to."/v3/".$object->getRawOriginal($name)));
         return $url;
 
     }else{
