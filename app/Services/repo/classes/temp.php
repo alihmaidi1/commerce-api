@@ -18,5 +18,21 @@ class temp implements tempInterface{
         ]);
     }
 
+    public function remove($id){
+
+
+        $temp=ModelsTemp::findOrFail($id);
+        $temp1=$temp;
+        $temp->delete();
+
+        return $temp1;
+
+    }
+
+    public function getTemp($id){
+
+        return ModelsTemp::findOrFail($id);
+    }
+
 
 }

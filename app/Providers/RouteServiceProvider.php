@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\currency;
+use App\Models\slider;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -46,6 +47,18 @@ class RouteServiceProvider extends ServiceProvider
             });
 
         });
+
+        Route::bind("slider",function($value){
+
+            return Cache::rememberForever("slider:".$value,function() use($value){
+
+                return slider::findOrFail($value);
+            });
+
+        });
+
+
+
     }
 
     /**

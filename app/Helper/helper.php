@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Image;
 use File;
+use Illuminate\Support\Facades\Storage;
 
 function tokenInfo($email,$password,$provider){
 
@@ -55,6 +56,13 @@ function storeResize($image,$name){
     $v2=$image->resize(500,700)->save(public_path("temp/v2/".$name),70);
     $v3=$image->resize(1000,1200)->save(public_path("temp/v3/".$name),90);
 
+        // $image=Image::make($image);
+        // $v1=$image->resize(200,300);
+        // $v2=$image->resize(500,700);
+        // $v3=$image->resize(1000,1200);
+        // Storage::disk("s3")->putFileAs("temp/v1",$v1,$name);
+
+
 
 }
 
@@ -75,5 +83,44 @@ function storeResizeImages($images,$temp){
 
     return $arr;
 
+
+}
+
+
+ function MoveFile($imageUrl,$from,$to){
+
+
+    File::move(public_path($from."/v1/".$imageUrl), public_path($to."/v1/".$imageUrl));
+    File::move(public_path($from."/v2/".$imageUrl), public_path($to."/v2/".$imageUrl));
+    File::move(public_path($from."/v3/".$imageUrl), public_path($to."/v3/".$imageUrl));
+
+}
+
+
+function updateimage($image_id,$temp,$to,$object){
+
+
+    if($image_id!=null){
+
+        $url=$temp->getTemp($image_id)->getRawOriginal("url");
+        MoveFile($url,"temp",$to);
+        $temp->remove($image_id);
+        return $url;
+
+    }else{
+
+        return $object->getRawOriginal("url");
+
+
+    }
+
+
+}
+
+function deleteImage($url,$from){
+
+    unlink(public_path($from."/v1/".$url));
+    unlink(public_path($from."/v2/".$url));
+    unlink(public_path($from."/v3/".$url));
 
 }

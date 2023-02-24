@@ -8,6 +8,9 @@ interface tempInterface {
 
     public function store($url);
 
+    public function remove($id);
+
+    public function getTemp($id);
 
 
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\currencyController;
 use App\Http\Controllers\imageController;
+use App\Http\Controllers\sliderController;
 
 Route::group(["prefix"=>"admin"],function(){
 
@@ -17,6 +18,7 @@ Route::group(["prefix"=>"admin"],function(){
 
 
     Route::apiResource("currency",currencyController::class);
+    Route::apiResource("slider",sliderController::class);
 
 
 
