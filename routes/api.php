@@ -6,6 +6,7 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\brandController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\cityController;
 use App\Http\Controllers\countryController;
 use App\Http\Controllers\currencyController;
 use App\Http\Controllers\imageController;
@@ -28,6 +29,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("category",categoryController::class);
     Route::apiResource("brand",brandController::class);
     Route::apiResource("country",countryController::class);
+    Route::apiResource("city",cityController::class);
 
 
 
