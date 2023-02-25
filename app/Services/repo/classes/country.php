@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Services\repo\classes;
+
+use App\Models\country as ModelsCountry;
+use App\Services\repo\interfaces\countryInterface;
+use Illuminate\Support\Facades\Cache;
+
+class country implements countryInterface{
+
+
+
+    public function store($name){
+
+
+        $country=ModelsCountry::create([
+
+            "name"=>$name
+
+        ]);
+
+        Cache::pull("countries");
+        Cache::put("country:".$country->id,$country);
+
+        return $country;
+    }
+
+
+    public function update($country,$name){
+
+        $country->name=$name;
+        $country->save();
+        Cache::pull("countries");
+        Cache::put("country:".$country->id,$country);
+        return $country;
+    }
+
+
+    public function getAllCountry(){
+
+
+        return Cache::rememberForever("countries",function(){
+
+
+            return ModelsCountry::all();
+
+        });
+    }
+
+
+    public function removeCountry($country){
+
+        $country1=$country;
+        $country->delete();
+        Cache::pull("countries");
+        Cache::pull("country:".$country1->id);
+        return $country1;
+
+    }
+
+}

@@ -6,6 +6,7 @@ use App\Services\repo\classes\admin;
 use App\Services\repo\classes\banner;
 use App\Services\repo\classes\brand;
 use App\Services\repo\classes\category;
+use App\Services\repo\classes\country;
 use App\Services\repo\classes\currency;
 use App\Services\repo\classes\slider;
 use App\Services\repo\classes\temp;
@@ -13,6 +14,7 @@ use App\Services\repo\interfaces\adminInterface;
 use App\Services\repo\interfaces\bannerInterface;
 use App\Services\repo\interfaces\brandInterface;
 use App\Services\repo\interfaces\categoryInterface;
+use App\Services\repo\interfaces\countryInterface;
 use App\Services\repo\interfaces\currencyInterface;
 use App\Services\repo\interfaces\sliderInterface;
 use App\Services\repo\interfaces\tempInterface;
@@ -33,6 +35,7 @@ class repo extends ServiceProvider
         $this->app->bind(bannerInterface::class,banner::class);
         $this->app->bind(categoryInterface::class,category::class);
         $this->app->bind(brandInterface::class,brand::class);
+        $this->app->bind(countryInterface::class,country::class);
 
     }
 

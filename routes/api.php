@@ -6,9 +6,11 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\brandController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\countryController;
 use App\Http\Controllers\currencyController;
 use App\Http\Controllers\imageController;
 use App\Http\Controllers\sliderController;
+use App\Services\repo\classes\country;
 
 Route::group(["prefix"=>"admin"],function(){
 
@@ -25,6 +27,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("banner",bannerController::class);
     Route::apiResource("category",categoryController::class);
     Route::apiResource("brand",brandController::class);
+    Route::apiResource("country",countryController::class);
 
 
 
