@@ -17,4 +17,11 @@ class currency extends Model
     public $hidden=["created_at","updated_at"];
 
 
+
+    public function products(){
+
+
+        return $this->hasMany(product::class,"currency_id");
+    }
+
 }

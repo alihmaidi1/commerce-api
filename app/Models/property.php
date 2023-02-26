@@ -15,5 +15,12 @@ class property extends Model
     public $hidden=["created_at","updated_at"];
 
 
+    public function products(){
+
+
+        return $this->belongsToMany(product::class,property_product::class,"property_id","product_id");
+
+    }
+
 
 }

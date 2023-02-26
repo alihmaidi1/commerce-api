@@ -98,6 +98,15 @@ class RouteServiceProvider extends ServiceProvider
 
         });
 
+        Route::bind("product",function($value){
+
+            return Cache::rememberForever("product:".$value,function() use($value){
+
+                return country::findOrFail($value);
+            });
+
+        });
+
 
 
     }
