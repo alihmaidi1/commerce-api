@@ -5,6 +5,7 @@ namespace App\Services\chainOfResponsibility;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\tempInterface;
 use Closure;
+use Illuminate\Support\Facades\Cache;
 
 class createProduct{
 

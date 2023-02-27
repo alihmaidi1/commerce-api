@@ -10,7 +10,7 @@ class product extends Model
 {
     use HasFactory,HasUuids;
 
-    public $appends=["properties"];
+    public $appends=["properties","images"];
 
 
     public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail"];
@@ -71,7 +71,6 @@ class product extends Model
 
     public function properties(){
 
-        // return $this->belongsToMany(property::class,property_product::class)->withPivot("values");
 
         return $this->belongsToMany(property::class,property_product::class,"product_id","property_id")->withPivot("values")->using(property_product::class);
     }
@@ -84,6 +83,13 @@ class product extends Model
 
     }
 
+
+    public function getImagesAttribute(){
+
+        return $this->images()->get(["url"]);
+
+
+    }
 
 
 

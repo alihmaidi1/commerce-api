@@ -5,7 +5,7 @@ namespace App\Services\repo\classes;
 
 use App\Models\temp as ModelsTemp;
 use App\Services\repo\interfaces\tempInterface;
-
+use Illuminate\Support\Facades\DB;
 
 class temp implements tempInterface{
 
@@ -37,7 +37,7 @@ class temp implements tempInterface{
 
     public function removeImages($images){
 
-        $urls=ModelsTemp::select("url")->get();
+        $urls=DB::table("temps")->whereIn("id",$images)->select("url")->get();
         ModelsTemp::destroy($images);
         return $urls;
 

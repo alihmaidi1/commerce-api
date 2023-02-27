@@ -102,7 +102,7 @@ function MoveFiles($images,$from,$to){
 
     foreach($images as $image){
 
-        MoveFile($image->GetRawOriginal("url"),$from,$to);
+        MoveFile($image->url,$from,$to);
 
 
     }

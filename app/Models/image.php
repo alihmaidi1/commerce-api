@@ -18,4 +18,16 @@ class image extends Model
     }
 
 
+    public function getUrlAttribute($value){
+
+
+        $arr=[];
+        $arr["200*300"]=public_path("brand/v1/".$value);
+        $arr["500*700"]=public_path("brand/v2/".$value);
+        $arr["1000*1200"]=public_path("brand/v3/".$value);
+        return $arr;
+
+
+    }
+
 }
