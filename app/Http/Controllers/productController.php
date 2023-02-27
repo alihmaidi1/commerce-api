@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\product\store;
 use App\Models\product;
 use App\Services\chainOfResponsibility\createProduct;
+use App\Services\chainOfResponsibility\storeImages;
 use App\Services\chainOfResponsibility\storeProperty;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\tempInterface;
@@ -45,15 +46,12 @@ class productController extends Controller
     public function store(store $request)
     {
 
-
-        $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class])
+        $request->temp=$this->temp;
+        $request->productModel=$this->product;
+        $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class,storeImages::class])
                 ->then(function($product){return $product;});
 
 
-
-        // $urls=$this->temp->removeImages($images);
-        // MoveFiles($urls,"temp","product");
-        // $product->images()->sync($urls);
 
 
 

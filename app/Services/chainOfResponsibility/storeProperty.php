@@ -18,7 +18,7 @@ class storeProperty{
 
         $request->product->properties()->sync($properties);
 
-        return $next($request->product);
+        return $next($request);
 
     }
 
