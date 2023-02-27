@@ -35,4 +35,14 @@ class temp implements tempInterface{
     }
 
 
+    public function removeImages($images){
+
+        $urls=ModelsTemp::select("url")->get();
+        ModelsTemp::destroy($images);
+        return $urls;
+
+
+    }
+
+
 }

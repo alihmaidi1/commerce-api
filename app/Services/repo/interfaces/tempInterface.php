@@ -12,5 +12,6 @@ interface tempInterface {
 
     public function getTemp($id);
 
+    public function removeImages($images);
 
 }

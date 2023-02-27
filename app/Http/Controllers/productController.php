@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\product\store;
 use App\Models\product;
+use App\Services\chainOfResponsibility\createProduct;
+use App\Services\chainOfResponsibility\storeProperty;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\tempInterface;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class productController extends Controller
 {
@@ -43,26 +46,16 @@ class productController extends Controller
     {
 
 
-        $name=$request->name;
-        $title=$request->title;
-        $description=$request->description;
-        $meta_title=$request->meta_title;
-        $meta_description=$request->meta_description;
-        $meta_logo=$request->meta_logo;
-        $category_id=$request->category_id;
-        $price=$request->price;
-        $quantity=$request->quantity;
-        $min_quantity=$request->min_quantity;
-        $selling_number=$request->selling_number;
-        $currency_id=$request->currency_id;
-        $brand_id=$request->brand_id;
-        $thumbnail=$request->thumbnail;
-        $images=$request->images;
-        $meta_logo=$this->temp->remove($meta_logo)->getRawOriginal("url");
-        MoveFile($meta_logo,"temp","product");
-        $thumbnail=$this->temp->remove($thumbnail)->getRawOriginal("url");
-        MoveFile($thumbnail,"temp","product");
-        $product=$this->product->store($name,$title,$description,$meta_title,$meta_description,$meta_logo,$category_id,$price,$quantity,$min_quantity,$currency_id,$brand_id,$thumbnail);
+        $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class])
+                ->then(function($product){return $product;});
+
+
+
+        // $urls=$this->temp->removeImages($images);
+        // MoveFiles($urls,"temp","product");
+        // $product->images()->sync($urls);
+
+
 
         return response()->json($product);
 

@@ -97,6 +97,24 @@ function storeResizeImages($images,$temp){
 }
 
 
+function MoveFiles($images,$from,$to){
+
+
+    foreach($images as $image){
+
+        MoveFile($image->GetRawOriginal("url"),$from,$to);
+
+
+    }
+
+
+
+
+
+}
+
+
+
 function updateimage($image_id,$temp,$to,$object,$name){
 
 
