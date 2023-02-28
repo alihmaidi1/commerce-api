@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Image;
-use File;
 use Illuminate\Support\Facades\Storage;
 
 function tokenInfo($email,$password,$provider){
@@ -87,25 +85,37 @@ function storeResizeImages($images,$temp){
 }
 
 
- function MoveFile($imageUrl,$from,$to){
+ function MoveFile($imageUrl,$from,$to,$id=null){
+
+    if($id!=null){
+
+        File::move(public_path($from."/v1/".$imageUrl), public_path($to."/v1/".$id."/".$imageUrl));
+        File::move(public_path($from."/v2/".$imageUrl), public_path($to."/v2/".$id."/".$imageUrl));
+        File::move(public_path($from."/v3/".$imageUrl), public_path($to."/v3/".$id."/".$imageUrl));
+
+    }else{
+
+        File::move(public_path($from."/v1/".$imageUrl), public_path($to."/v1/".$imageUrl));
+        File::move(public_path($from."/v2/".$imageUrl), public_path($to."/v2/".$imageUrl));
+        File::move(public_path($from."/v3/".$imageUrl), public_path($to."/v3/".$imageUrl));
 
 
-    File::move(public_path($from."/v1/".$imageUrl), public_path($to."/v1/".$imageUrl));
-    File::move(public_path($from."/v2/".$imageUrl), public_path($to."/v2/".$imageUrl));
-    File::move(public_path($from."/v3/".$imageUrl), public_path($to."/v3/".$imageUrl));
+    }
 
 }
 
 
-function MoveFiles($images,$from,$to){
+function MoveFiles($images,$from,$to,$id=null){
 
 
-    foreach($images as $image){
 
-        MoveFile($image->url,$from,$to);
+        foreach($images as $image){
+
+            MoveFile($image->url,$from,$to,$id);
 
 
-    }
+        }
+
 
 
 
@@ -143,5 +153,30 @@ function deleteImage($url,$from){
     unlink(public_path($from."/v1/".$url));
     unlink(public_path($from."/v2/".$url));
     unlink(public_path($from."/v3/".$url));
+
+}
+
+function makeDirectory($folder,$id){
+
+
+    $path1=public_path($folder."/v1/".$id);
+    $path2=public_path($folder."/v2/".$id);
+    $path3=public_path($folder."/v3/".$id);
+
+    if(!File::isDirectory($path1)){
+        File::makeDirectory($path1, 0777);
+
+    }
+
+    if(!File::isDirectory($path2)){
+        File::makeDirectory($path2, 0777);
+
+    }
+
+    if(!File::isDirectory($path3)){
+        File::makeDirectory($path3, 0777);
+
+    }
+
 
 }

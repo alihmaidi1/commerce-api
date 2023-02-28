@@ -7,7 +7,6 @@ use App\Http\Requests\slider\update;
 use App\Models\slider;
 use App\Services\repo\interfaces\sliderInterface;
 use App\Services\repo\interfaces\tempInterface;
-use Illuminate\Http\Request;
 
 class sliderController extends Controller
 {

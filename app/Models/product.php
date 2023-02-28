@@ -27,9 +27,9 @@ class product extends Model
     public function getMetaLogoAttribute($value){
 
         $arr=[];
-        $arr["200*300"]=public_path("product/v1/".$value);
-        $arr["500*700"]=public_path("product/v2/".$value);
-        $arr["1000*1200"]=public_path("product/v3/".$value);
+        $arr["200*300"]=public_path("product/v1/".$this->id."/".$value);
+        $arr["500*700"]=public_path("product/v2/".$this->id."/".$value);
+        $arr["1000*1200"]=public_path("product/v3/".$this->id."/".$value);
 
         return $arr;
 
@@ -41,9 +41,9 @@ class product extends Model
     public function getThumbnailAttribute($value){
 
         $arr=[];
-        $arr["200*300"]=public_path("product/v1/".$value);
-        $arr["500*700"]=public_path("product/v2/".$value);
-        $arr["1000*1200"]=public_path("product/v3/".$value);
+        $arr["200*300"]=public_path("product/v1/".$this->id."/".$value);
+        $arr["500*700"]=public_path("product/v2/".$this->id."/".$value);
+        $arr["1000*1200"]=public_path("product/v3/".$this->id."/".$value);
 
         return $arr;
 
@@ -86,7 +86,7 @@ class product extends Model
 
     public function getImagesAttribute(){
 
-        return $this->images()->get(["url"]);
+        return $this->images()->get(["url","id"]);
 
 
     }

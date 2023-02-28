@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Services\chainOfResponsibility;
+
+namespace App\Services\chainOfResponsibility\updateProduct;
 
 use App\Models\image;
 use Closure;
 
-class storeImages{
+class updateImages{
 
 
 
     public function handle($request,Closure $next){
 
 
+        image::destroy($request->deleted_image);
         $urls=$request->temp->removeImages($request->images);
         MoveFiles($urls,"temp","product");
         $images=[];
@@ -23,8 +25,8 @@ class storeImages{
         }
         image::insert($images);
 
-
         return $next($request->product);
+
 
 
     }

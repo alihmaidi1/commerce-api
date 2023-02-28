@@ -13,6 +13,7 @@ use App\Http\Controllers\imageController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\propertyController;
 use App\Http\Controllers\sliderController;
+use App\Http\Controllers\tagController;
 use App\Services\repo\classes\country;
 
 Route::group(["prefix"=>"admin"],function(){
@@ -34,6 +35,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("city",cityController::class);
     Route::apiResource("property",propertyController::class);
     Route::apiResource("product",productController::class);
+    Route::apiResource("tag",tagController::class);
 
 
 

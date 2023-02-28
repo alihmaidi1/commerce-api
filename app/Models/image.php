@@ -18,13 +18,13 @@ class image extends Model
     }
 
 
-    public function getUrlAttribute($value){
+    public function getUrlAttribute(){
 
-
+        $folder=($this->imageable_type=="App\\Models\\product")?"product":"product";
         $arr=[];
-        $arr["200*300"]=public_path("brand/v1/".$value);
-        $arr["500*700"]=public_path("brand/v2/".$value);
-        $arr["1000*1200"]=public_path("brand/v3/".$value);
+        $arr["200*300"]=public_path($folder."/v1/".$this->imageable_id."/".$value);
+        $arr["500*700"]=public_path($folder."/v2/".$this->imageable_id."/".$value);
+        $arr["1000*1200"]=public_path($folder."/v3/".$this->imageable_id."/".$value);
         return $arr;
 
 

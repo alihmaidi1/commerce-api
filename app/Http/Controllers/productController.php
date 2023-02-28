@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\product\store;
+use App\Http\Requests\product\updateProduct;
 use App\Models\product;
-use App\Services\chainOfResponsibility\createProduct;
-use App\Services\chainOfResponsibility\storeImages;
-use App\Services\chainOfResponsibility\storeProperty;
+use App\Services\chainOfResponsibility\addingProduct\createProduct;
+use App\Services\chainOfResponsibility\addingProduct\storeImages;
+use App\Services\chainOfResponsibility\addingProduct\storeProperty;
+use App\Services\chainOfResponsibility\updateProduct\updateImages;
+use App\Services\chainOfResponsibility\updateProduct\updateProduct as UpdateProductUpdateProduct;
+use App\Services\chainOfResponsibility\updateProduct\updateProperty;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\tempInterface;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class productController extends Controller
@@ -29,7 +32,10 @@ class productController extends Controller
     }
     public function index()
     {
-        //
+
+
+        return response()->json($this->product->getAllProduct());
+
     }
 
     /**
@@ -65,7 +71,8 @@ class productController extends Controller
      */
     public function show(product $product)
     {
-        //
+
+        return response()->json($product);
     }
 
     /**
@@ -79,9 +86,18 @@ class productController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, product $product)
+    public function update(updateProduct $request, product $product)
     {
-        //
+
+        $request->product=$product;
+        $request->temp=$this->temp;
+        $request->productModel=$this->product;
+
+        $product=app(Pipeline::class)->send($request)->through([UpdateProductUpdateProduct::class,updateProperty::class,updateImages::class])
+            ->then(function($product){return $product;});
+
+        return response()->json($product);
+
     }
 
     /**
@@ -89,6 +105,8 @@ class productController extends Controller
      */
     public function destroy(product $product)
     {
-        //
+
+        return response()->json($this->product->deleteProduct($product));
+
     }
 }

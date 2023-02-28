@@ -16,7 +16,7 @@ return [
     "tag",
     "property",
     "country",
-    "city"
+    "city",
 
 
 

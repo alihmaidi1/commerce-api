@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Services\chainOfResponsibility;
-
+namespace App\Services\chainOfResponsibility\addingProduct;
 use App\Models\product;
 use Closure;
 

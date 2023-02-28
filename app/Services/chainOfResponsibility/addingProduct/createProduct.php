@@ -1,23 +1,11 @@
 <?php
 
-namespace App\Services\chainOfResponsibility;
+namespace App\Services\chainOfResponsibility\addingProduct;
 
-use App\Services\repo\interfaces\productInterface;
-use App\Services\repo\interfaces\tempInterface;
 use Closure;
-use Illuminate\Support\Facades\Cache;
 
 class createProduct{
 
-    // public $temp;
-    // public $product;
-    // public function __construct(tempInterface $temp,productInterface $product){
-
-
-    //     $this->temp=$temp;
-    //     $this->product=$product;
-
-    // }
 
     public function handle($request, Closure $next){
 
@@ -35,16 +23,12 @@ class createProduct{
         $brand_id=$request->brand_id;
         $thumbnail=$request->thumbnail;
         $meta_logo=$request->temp->remove($meta_logo)->getRawOriginal("url");
-        MoveFile($meta_logo,"temp","product");
         $thumbnail=$request->temp->remove($thumbnail)->getRawOriginal("url");
-        MoveFile($thumbnail,"temp","product");
         $request->product=$request->productModel->store($name,$title,$description,$meta_title,$meta_description,$meta_logo,$category_id,$price,$quantity,$min_quantity,$currency_id,$brand_id,$thumbnail);
+        makeDirectory("product",$request->product->id);
+        MoveFile($meta_logo,"temp","product",$request->product->id);
+        MoveFile($thumbnail,"temp","product",$request->product->id);
         return $next($request);
-
-
-
-
-
 
 
 

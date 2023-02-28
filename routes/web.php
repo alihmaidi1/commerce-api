@@ -15,7 +15,8 @@ use Twilio\Rest\Client;
 |
 // */
 
-// Route::get('/', function () {
+Route::get('/', function () {
+
 
 
 //     $client = new Client(env("TWILIO_SID"), env("TWILIO_SECRET"));
@@ -24,5 +25,5 @@ use Twilio\Rest\Client;
 //         'body' => "hello user you can reset password by this code :".$this->code]);
 
 
-//     return view('welcome');
-// });
+    return view('welcome');
+});
