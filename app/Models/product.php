@@ -10,7 +10,7 @@ class product extends Model
 {
     use HasFactory,HasUuids;
 
-    public $appends=["properties","images"];
+    public $appends=["properties","images","tags"];
 
 
     public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail"];
@@ -91,6 +91,19 @@ class product extends Model
 
     }
 
+
+    public function tags(){
+
+
+        return $this->belongsToMany(tag::class,tag_product::class,"product_id","tag_id");
+
+    }
+
+
+    public function getTagsAttribute(){
+
+        return $this->tags()->get();
+    }
 
 
 }

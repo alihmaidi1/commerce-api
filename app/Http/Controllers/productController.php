@@ -8,6 +8,7 @@ use App\Models\product;
 use App\Services\chainOfResponsibility\addingProduct\createProduct;
 use App\Services\chainOfResponsibility\addingProduct\storeImages;
 use App\Services\chainOfResponsibility\addingProduct\storeProperty;
+use App\Services\chainOfResponsibility\addingProduct\storeTag;
 use App\Services\chainOfResponsibility\updateProduct\updateImages;
 use App\Services\chainOfResponsibility\updateProduct\updateProduct as UpdateProductUpdateProduct;
 use App\Services\chainOfResponsibility\updateProduct\updateProperty;
@@ -54,7 +55,7 @@ class productController extends Controller
 
         $request->temp=$this->temp;
         $request->productModel=$this->product;
-        $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class,storeImages::class])
+        $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class,storeTag::class,storeImages::class])
                 ->then(function($product){return $product;});
 
 

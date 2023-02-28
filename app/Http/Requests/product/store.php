@@ -39,7 +39,9 @@ class store extends FormRequest
             "thumbnail"=>"required|exists:temps,id",
             "images"=>"required|array",
             "images.*"=>"required|exists:temps,id",
-            "property"=>["array","required",new checkPropertyRule]
+            "property"=>["array","required",new checkPropertyRule],
+            "tags"=>"array",
+            "tags.*"=>"required|exists:tags,id"
         ];
     }
 }

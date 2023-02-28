@@ -21,7 +21,6 @@ class storeImages{
         }
         image::insert($images);
 
-
         return $next($request->product);
 
 

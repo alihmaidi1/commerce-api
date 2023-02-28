@@ -11,9 +11,12 @@ class tag extends Model
     use HasFactory,HasUuids;
 
     public $fillable=["name"];
-    public $hidden=["created_at","updated_at"];
+    public $hidden=["created_at","updated_at","pivot"];
 
+    public function products(){
 
+        return $this->belongsToMany(product::class,tag_product::class,"tag_id","product_id");
+    }
 
 
 }
