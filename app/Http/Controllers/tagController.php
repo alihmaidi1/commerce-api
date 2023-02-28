@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\tag\store;
+use App\Http\Requests\tag\update;
 use App\Models\tag;
-use Illuminate\Http\Request;
+use App\Services\repo\interfaces\tagInterface;
 
 class tagController extends Controller
 {
 
+    public $tag;
 
-    public function __construct(){
+    public function __construct(tagInterface $tag){
 
         $this->middleware(["auth:api","can:tag"])->except(["index","show"]);
-
+        $this->tag=$tag;
     }
 
     /**
@@ -20,7 +23,10 @@ class tagController extends Controller
      */
     public function index()
     {
-        //
+
+        return response()->json($this->tag->getAllTag());
+
+
     }
 
     /**
@@ -34,9 +40,14 @@ class tagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(store $request)
     {
-        //
+
+
+
+        return response()->json($this->tag->store($request->name));
+
+
     }
 
     /**
@@ -44,7 +55,7 @@ class tagController extends Controller
      */
     public function show(tag $tag)
     {
-        //
+        return response()->json($tag);
     }
 
     /**
@@ -58,9 +69,11 @@ class tagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tag $tag)
+    public function update(update $request, tag $tag)
     {
-        //
+
+        return response()->json($this->tag->update($tag,$request->name));
+
     }
 
     /**
@@ -68,6 +81,11 @@ class tagController extends Controller
      */
     public function destroy(tag $tag)
     {
-        //
+
+        $this->tag->deleteTag($tag);
+
+        return response()->json();
+
+
     }
 }

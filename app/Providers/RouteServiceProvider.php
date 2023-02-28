@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\country;
 use App\Models\currency;
 use App\Models\slider;
+use App\Models\tag;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -109,6 +110,16 @@ class RouteServiceProvider extends ServiceProvider
 
 
 
+        Route::bind("tag",function($value){
+
+            return Cache::rememberForever("tag:".$value,function() use($value){
+
+                return tag::findOrFail($value);
+            });
+
+        });
+
+
     }
 
     /**
@@ -136,5 +147,7 @@ class RouteServiceProvider extends ServiceProvider
 
             });
         });
+
+
     }
 }

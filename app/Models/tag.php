@@ -11,6 +11,7 @@ class tag extends Model
     use HasFactory,HasUuids;
 
     public $fillable=["name"];
+    public $hidden=["created_at","updated_at"];
 
 
 

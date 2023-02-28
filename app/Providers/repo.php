@@ -12,6 +12,7 @@ use App\Services\repo\classes\currency;
 use App\Services\repo\classes\product;
 use App\Services\repo\classes\property;
 use App\Services\repo\classes\slider;
+use App\Services\repo\classes\tag;
 use App\Services\repo\classes\temp;
 use App\Services\repo\interfaces\adminInterface;
 use App\Services\repo\interfaces\bannerInterface;
@@ -23,6 +24,7 @@ use App\Services\repo\interfaces\currencyInterface;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\propertyInterface;
 use App\Services\repo\interfaces\sliderInterface;
+use App\Services\repo\interfaces\tagInterface;
 use App\Services\repo\interfaces\tempInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -45,6 +47,7 @@ class repo extends ServiceProvider
         $this->app->bind(cityInterface::class,city::class);
         $this->app->bind(propertyInterface::class,property::class);
         $this->app->bind(productInterface::class,product::class);
+        $this->app->bind(tagInterface::class,tag::class);
 
     }
 
