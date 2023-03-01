@@ -5,6 +5,7 @@ namespace App\Services\repo\classes;
 use App\Models\product as ModelsProduct;
 use App\Services\repo\interfaces\productInterface;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class product implements productInterface{
 
@@ -71,8 +72,15 @@ class product implements productInterface{
 
     public function deleteProduct($product){
 
-        // unlink(public_path("product/v1/".$product->getRawOriginal("")));
-        // $product->properties()->dele
+        Storage::deleteDirectory(public_path("public/v1/".$product->id));
+        Storage::deleteDirectory(public_path("public/v2/".$product->id));
+        Storage::deleteDirectory(public_path("public/v3/".$product->id));
+
+        $product->delete();
+        Cache::pull("products");
+        Cache::pull("product:".$product->id);
+
+        return "true";
 
 
 

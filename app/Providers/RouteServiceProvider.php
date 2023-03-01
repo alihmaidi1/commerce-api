@@ -6,6 +6,7 @@ use App\Models\banner;
 use App\Models\category;
 use App\Models\country;
 use App\Models\currency;
+use App\Models\product;
 use App\Models\slider;
 use App\Models\tag;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -103,7 +104,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("product:".$value,function() use($value){
 
-                return country::findOrFail($value);
+                return product::findOrFail($value);
             });
 
         });

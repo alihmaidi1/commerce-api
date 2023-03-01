@@ -10,6 +10,7 @@ class product extends Model
 {
     use HasFactory,HasUuids;
 
+    // meta_logo is exists in this table
     public $appends=["properties","images","tags"];
 
 
@@ -86,9 +87,7 @@ class product extends Model
 
     public function getImagesAttribute(){
 
-        return $this->images()->get(["url","id"]);
-
-
+        return $this->images()->get();
     }
 
 

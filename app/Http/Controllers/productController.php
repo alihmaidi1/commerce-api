@@ -12,6 +12,7 @@ use App\Services\chainOfResponsibility\addingProduct\storeTag;
 use App\Services\chainOfResponsibility\updateProduct\updateImages;
 use App\Services\chainOfResponsibility\updateProduct\updateProduct as UpdateProductUpdateProduct;
 use App\Services\chainOfResponsibility\updateProduct\updateProperty;
+use App\Services\chainOfResponsibility\updateProduct\updateTag;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\tempInterface;
 use Illuminate\Pipeline\Pipeline;
@@ -94,7 +95,7 @@ class productController extends Controller
         $request->temp=$this->temp;
         $request->productModel=$this->product;
 
-        $product=app(Pipeline::class)->send($request)->through([UpdateProductUpdateProduct::class,updateProperty::class,updateImages::class])
+        $product=app(Pipeline::class)->send($request)->through([UpdateProductUpdateProduct::class,updateProperty::class,updateTag::class,updateImages::class])
             ->then(function($product){return $product;});
 
         return response()->json($product);
@@ -106,8 +107,8 @@ class productController extends Controller
      */
     public function destroy(product $product)
     {
-
-        return response()->json($this->product->deleteProduct($product));
+        $this->product->deleteProduct($product);
+        return response()->json();
 
     }
 }
