@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\country;
 use App\Models\currency;
 use App\Models\product;
+use App\Models\role;
 use App\Models\slider;
 use App\Models\tag;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -120,6 +121,16 @@ class RouteServiceProvider extends ServiceProvider
 
         });
 
+
+
+        Route::bind("role",function($value){
+
+            return Cache::rememberForever("role:".$value,function() use($value){
+
+                return role::findOrFail($value);
+            });
+
+        });
 
     }
 

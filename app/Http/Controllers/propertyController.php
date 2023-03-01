@@ -6,7 +6,6 @@ use App\Http\Requests\property\store;
 use App\Http\Requests\property\update;
 use App\Models\property;
 use App\Services\repo\interfaces\propertyInterface;
-use Illuminate\Http\Request;
 
 class propertyController extends Controller
 {
@@ -23,8 +22,6 @@ class propertyController extends Controller
      */
     public function index()
     {
-
-
 
         return response()->json($this->property->getAllProperty());
 
