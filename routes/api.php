@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\brandController;
 use App\Http\Controllers\categoryController;
@@ -38,6 +39,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("product",productController::class);
     Route::apiResource("tag",tagController::class);
     Route::apiResource("role",roleController::class);
+    Route::apiResource("admin",adminController::class);
 
 
 

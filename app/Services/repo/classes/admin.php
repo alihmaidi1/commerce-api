@@ -4,7 +4,6 @@ namespace App\Services\repo\classes;
 
 use App\Models\admin as ModelsAdmin;
 use App\Services\repo\interfaces\adminInterface;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
@@ -57,6 +56,54 @@ class admin implements adminInterface{
 
     }
 
+    public function storeAdmin($name,$email,$password,$role_id,$phone){
+
+
+        $admin=ModelsAdmin::create([
+
+            "name"=>$name,
+            "email"=>$email,
+            "password"=>Hash::make($password),
+            "role_id"=>$role_id,
+            "phone"=>$phone
+        ]);
+
+        Cache::pull("admins");
+        Cache::put("admin:".$admin->id,$admin);
+
+        return $admin;
+
+    }
+
+    public function updateAdmin($admin,$name,$email,$password,$role_id,$phone){
+
+        $admin->name=$name;
+        $admin->email=$email;
+        $admin->password=$password;
+        $admin->role_id=$role_id;
+        $admin->phone=$phone;
+        $admin->save();
+
+        Cache::pull("admins");
+        Cache::put("admin:".$admin->id,$admin);
+        return $admin;
+
+    }
+
+
+    public function getAllAdmin(){
+
+
+        return ModelsAdmin::where("id","!=",auth("api")->user()->id)->get();
+    }
+
+    public function deleteAdmin($admin){
+
+
+        $admin->delete();
+        Cache::pull("admins");
+        Cache::pull("admin:".$admin->id);
+    }
 
 
 }
