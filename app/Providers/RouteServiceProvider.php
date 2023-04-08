@@ -6,6 +6,7 @@ use App\Models\banner;
 use App\Models\category;
 use App\Models\country;
 use App\Models\currency;
+use App\Models\page;
 use App\Models\product;
 use App\Models\role;
 use App\Models\slider;
@@ -132,6 +133,15 @@ class RouteServiceProvider extends ServiceProvider
 
         });
 
+
+        Route::bind("page",function($value){
+
+            return Cache::rememberForever("page:".$value,function() use($value){
+
+                return page::findOrFail($value);
+            });
+
+        });
     }
 
     /**

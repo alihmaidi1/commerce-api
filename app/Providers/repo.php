@@ -9,6 +9,7 @@ use App\Services\repo\classes\category;
 use App\Services\repo\classes\city;
 use App\Services\repo\classes\country;
 use App\Services\repo\classes\currency;
+use App\Services\repo\classes\page;
 use App\Services\repo\classes\product;
 use App\Services\repo\classes\property;
 use App\Services\repo\classes\role;
@@ -22,6 +23,7 @@ use App\Services\repo\interfaces\categoryInterface;
 use App\Services\repo\interfaces\cityInterface;
 use App\Services\repo\interfaces\countryInterface;
 use App\Services\repo\interfaces\currencyInterface;
+use App\Services\repo\interfaces\pageInterface;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\propertyInterface;
 use App\Services\repo\interfaces\roleInterface;
@@ -51,6 +53,7 @@ class repo extends ServiceProvider
         $this->app->bind(productInterface::class,product::class);
         $this->app->bind(tagInterface::class,tag::class);
         $this->app->bind(roleInterface::class,role::class);
+        $this->app->bind(pageInterface::class,page::class);
 
     }
 

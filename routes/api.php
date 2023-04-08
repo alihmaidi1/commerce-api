@@ -11,6 +11,7 @@ use App\Http\Controllers\cityController;
 use App\Http\Controllers\countryController;
 use App\Http\Controllers\currencyController;
 use App\Http\Controllers\imageController;
+use App\Http\Controllers\pageController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\propertyController;
 use App\Http\Controllers\roleController;
@@ -40,6 +41,8 @@ Route::group(["prefix"=>"admin"],function(){
     Route::apiResource("tag",tagController::class);
     Route::apiResource("role",roleController::class);
     Route::apiResource("admin",adminController::class);
+    Route::apiResource("page",pageController::class);
+
 
 
 
