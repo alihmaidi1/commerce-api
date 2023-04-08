@@ -17,7 +17,6 @@ class sliderController extends Controller
      public $slider;
      public $temp;
      public function __construct(sliderInterface $slider,tempInterface $temp){
-
         $this->middleware(["auth:api","can:slider"])->except(["index","show"]);
         $this->slider=$slider;
         $this->temp=$temp;
@@ -30,13 +29,6 @@ class sliderController extends Controller
         return response()->json($this->slider->getAllSlider());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -68,13 +60,6 @@ class sliderController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(slider $slider)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

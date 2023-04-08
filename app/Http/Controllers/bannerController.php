@@ -7,7 +7,6 @@ use App\Http\Requests\banner\update;
 use App\Models\banner;
 use App\Services\repo\interfaces\bannerInterface;
 use App\Services\repo\interfaces\tempInterface;
-use Illuminate\Http\Request;
 
 class bannerController extends Controller
 {
@@ -34,13 +33,6 @@ class bannerController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -72,14 +64,6 @@ class bannerController extends Controller
 
         return response()->json($banner);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(banner $banner)
-    {
-        //
     }
 
     /**

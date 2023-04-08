@@ -28,7 +28,7 @@ class admin extends Authenticatable implements JWTSubject
     public function getRoleAttribute(){
 
 
-        return $this->role()->get();
+        return $this->role()->first();
 
     }
     public function getJWTCustomClaims()

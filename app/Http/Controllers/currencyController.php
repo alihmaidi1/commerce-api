@@ -6,7 +6,6 @@ use App\Http\Requests\currency\storeRequest;
 use App\Http\Requests\currency\update;
 use App\Models\currency;
 use App\Services\repo\interfaces\currencyInterface;
-use Illuminate\Http\Request;
 
 class currencyController extends Controller
 {

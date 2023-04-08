@@ -17,7 +17,7 @@ class storeImages{
         $images=[];
 
         foreach($urls as $image){
-            $images[]=["imageable_id"=>$request->product->it,"imageable_type"=>"App\\Models\\product","url"=>$image->url];
+            $images[]=["imageable_id"=>$request->product->id,"imageable_type"=>"App\\Models\\product","url"=>$image->url];
         }
         image::insert($images);
 

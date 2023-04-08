@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->uuid("id");
             $table->primary("id");
+            $table->uuid("parent_id")->nullable();
             $table->string("name")->unique();
             $table->boolean("status");
             $table->integer("rank")->unique();
