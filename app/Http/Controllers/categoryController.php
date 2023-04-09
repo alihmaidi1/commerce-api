@@ -57,11 +57,13 @@ class categoryController extends Controller
         $meta_title=$request->meta_title;
         $url=$request->id_url;
         $meta_logo=$request->id_meta_logo;
+        $parent_id=$request->parent_id;
+
         $url=$this->temp->remove($url)->getRawOriginal("url");
         $meta_logo=$this->temp->remove($meta_logo)->getRawOriginal("url");
         MoveFile($url,"temp","category");
         MoveFile($meta_logo,"temp","category");
-        $category=$this->category->store($name,$status,$rank,$description,$meta_description,$meta_title,$url,$meta_logo);
+        $category=$this->category->store($name,$status,$rank,$description,$meta_description,$meta_title,$url,$meta_logo,$parent_id);
 
         return response()->json($category);
 

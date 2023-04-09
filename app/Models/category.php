@@ -10,6 +10,8 @@ class category extends Model
 {
     use HasFactory,HasUuids;
 
+    public $with=["childs"];
+
     public $fillable=["name","status","rank","description","meta_description","meta_title","url","meta_logo","parent_id","parent_id"];
 
     public $hidden=["created_at","updated_at"];
@@ -20,6 +22,13 @@ class category extends Model
 
     }
 
+    // public function getChildsAttribute(){
+
+
+    //     return $this->childs()->get();
+
+
+    // }
 
     public function parent(){
 

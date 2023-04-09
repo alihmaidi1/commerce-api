@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 class category implements categoryInterface{
 
 
-    public function store($name,$status,$rank,$description,$meta_description,$meta_title,$url,$meta_logo){
+    public function store($name,$status,$rank,$description,$meta_description,$meta_title,$url,$meta_logo,$parent_id){
 
 
         $category=ModelsCategory::create([
@@ -21,7 +21,8 @@ class category implements categoryInterface{
             "meta_description"=>$meta_description,
             "meta_title"=>$meta_title,
             "url"=>$url,
-            "meta_logo"=>$meta_logo
+            "meta_logo"=>$meta_logo,
+            "parent_id"=>$parent_id
         ]);
         Cache::pull("categories");
         Cache::put("category:".$category->id,$category);
@@ -51,7 +52,7 @@ class category implements categoryInterface{
 
         return Cache::rememberForever("categories",function(){
 
-            return ModelsCategory::all();
+            return ModelsCategory::where("parent_id",null)->get();
 
         });
     }

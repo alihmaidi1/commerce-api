@@ -31,6 +31,7 @@ class store extends FormRequest
             "meta_title"=>"required|string",
             "id_url"=>"required|exists:temps,id",
             "id_meta_logo"=>"required|exists:temps,id",
+            "parent_id"=>"exists:categories,id"
 
 
         ];
