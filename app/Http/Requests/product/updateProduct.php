@@ -41,10 +41,10 @@ class updateProduct extends FormRequest
             "deleted_image"=>"array",
             // "deleted_image.*"=>["required",new checkImageProduct(request("product"))],
             "deleted_image.*"=>["required","exists:images,id"],
-
             "images"=>"array",
             "images.*"=>"required|exists:temps,id",
-            "property"=>["array","required",new checkPropertyRule]
+            "property"=>["array","required",new checkPropertyRule],
+            "property.*"=>"required|string"
 
 
 

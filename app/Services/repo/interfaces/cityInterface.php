@@ -6,8 +6,8 @@ interface cityInterface{
 
 
 
-    public function store($name,$country_id);
-    public function update($city,$name,$country_id);
+    public function store($name,$country_id,$price,$currency_id);
+    public function update($city,$name,$country_id,$price,$currency_id);
     public function removeCity($city);
 
 }

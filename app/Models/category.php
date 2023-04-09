@@ -22,13 +22,6 @@ class category extends Model
 
     }
 
-    // public function getChildsAttribute(){
-
-
-    //     return $this->childs()->get();
-
-
-    // }
 
     public function parent(){
 

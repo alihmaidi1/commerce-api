@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign("product_id")->references("id")->on("products")->onDelete("cascade")->onUpdate("cascade");
             $table->uuid("property_id");
             $table->foreign("property_id")->references("id")->on("properties")->onDelete("cascade")->onUpdate("cascade");
+            $table->unique(["product_id","property_id"]);
             $table->json("values");
             $table->timestamps();
         });

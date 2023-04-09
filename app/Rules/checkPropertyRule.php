@@ -18,7 +18,7 @@ class checkPropertyRule implements ValidationRule
 
         $keys=array_keys($value);
         $property=property::whereIn("id",$keys)->count();
-        if(!$property){
+        if($property!=count($keys)){
             $fail("The property is not exists");
         }
     }

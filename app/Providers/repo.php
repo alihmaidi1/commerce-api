@@ -7,6 +7,7 @@ use App\Services\repo\classes\banner;
 use App\Services\repo\classes\brand;
 use App\Services\repo\classes\category;
 use App\Services\repo\classes\city;
+use APp\Services\repo\classes\copon;
 use App\Services\repo\classes\country;
 use App\Services\repo\classes\currency;
 use App\Services\repo\classes\page;
@@ -21,6 +22,7 @@ use App\Services\repo\interfaces\bannerInterface;
 use App\Services\repo\interfaces\brandInterface;
 use App\Services\repo\interfaces\categoryInterface;
 use App\Services\repo\interfaces\cityInterface;
+use App\Services\repo\interfaces\coponInterface;
 use App\Services\repo\interfaces\countryInterface;
 use App\Services\repo\interfaces\currencyInterface;
 use App\Services\repo\interfaces\pageInterface;
@@ -54,6 +56,7 @@ class repo extends ServiceProvider
         $this->app->bind(tagInterface::class,tag::class);
         $this->app->bind(roleInterface::class,role::class);
         $this->app->bind(pageInterface::class,page::class);
+        $this->app->bind(coponInterface::class,copon::class);
 
     }
 

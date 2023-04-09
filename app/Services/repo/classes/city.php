@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Cache;
 
 class city implements cityInterface{
 
-    public function store($name,$country_id){
+    public function store($name,$country_id,$price,$currency_id)
+    {
 
 
         $city=ModelsCity::create([
 
             "name"=>$name,
-            "country_id"=>$country_id
+            "country_id"=>$country_id,
+            "price"=>$price,
+            "currency_id"=>$currency_id
 
         ]);
         Cache::pull("citys");
@@ -23,10 +26,12 @@ class city implements cityInterface{
         return $city;
     }
 
-    public function update($city,$name,$country_id){
+    public function update($city,$name,$country_id,$price,$currency_id){
 
 
         $city->name=$name;
+        $city->price=$price;
+        $city->currency_id=$currency_id;
         $city->country_id=$country_id;
         $city->save();
         Cache::pull("citys");

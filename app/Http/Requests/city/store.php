@@ -24,7 +24,9 @@ class store extends FormRequest
         return [
 
             "name"=>"required",
-            "country_id"=>"required|exists:countries,id"
+            "country_id"=>"required|exists:countries,id",
+            "price"=>"required|numeric",
+            "currency_id"=>"required|exists:currencies,id"
 
         ];
     }

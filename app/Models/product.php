@@ -104,5 +104,12 @@ class product extends Model
         return $this->tags()->get();
     }
 
+    public function copon(){
+
+        return $this->belongsTo(copon::class,"copon_id");
+
+    }
+
+
 
 }

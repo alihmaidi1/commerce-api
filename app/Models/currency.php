@@ -24,4 +24,19 @@ class currency extends Model
         return $this->hasMany(product::class,"currency_id");
     }
 
+    public function citys(){
+
+
+        return $this->hasMany(city::class,"currency_id");
+
+    }
+
+
+    public function copon(){
+
+
+        return $this->hasMany(city::class,"currency_id");
+
+    }
+
 }

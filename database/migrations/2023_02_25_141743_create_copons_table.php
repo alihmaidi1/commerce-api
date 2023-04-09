@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('copons', function (Blueprint $table) {
+
             $table->uuid("id");
             $table->primary("id");
-            $table->string("name");
-            $table->uuid("country_id");
-            $table->foreign("country_id")->references("id")->on("countries")->onDelete("cascade")->onUpdate("cascade");
-            $table->unique(["country_id","name"]);
-            $table->float("price");
+            $table->string("name")->unique();
+            $table->enum("type",["precent","value"]);
+            $table->float("value");
             $table->uuid("currency_id");
             $table->foreign("currency_id")->references("id")->on("currencies")->onDelete("cascade")->onUpdate("cascade");
+            $table->timestamp("end_at");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('copons');
     }
 };

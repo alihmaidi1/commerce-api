@@ -41,28 +41,14 @@ class cityController extends Controller
     {
 
         $name=$request->name;
+        $price=$request->price;
+        $currency_id=$request->currency_id;
         $country_id=$request->country_id;
-        $city=$this->city->store($name,$country_id);
+        $city=$this->city->store($name,$country_id,$price,$currency_id);
 
         return response()->json($city);
 
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(city $city)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(city $city)
-    {
-        //
     }
 
     /**
@@ -72,8 +58,10 @@ class cityController extends Controller
     {
 
         $name=$request->name;
+        $price=$request->price;
+        $currency_id=$request->currency_id;
         $country_id=$request->country_id;
-        $city=$this->city->update($city,$name,$country_id);
+        $city=$this->city->update($city,$name,$country_id,$price,$currency_id);
         return response()->json($city);
 
     }

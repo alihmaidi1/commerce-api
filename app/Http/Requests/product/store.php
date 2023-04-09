@@ -40,6 +40,7 @@ class store extends FormRequest
             "images"=>"required|array",
             "images.*"=>"required|exists:temps,id",
             "property"=>["array","required",new checkPropertyRule],
+            "property.*"=>"required|string",
             "tags"=>"array",
             "tags.*"=>"required|exists:tags,id"
         ];
