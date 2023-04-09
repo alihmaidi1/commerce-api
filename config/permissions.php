@@ -17,6 +17,7 @@ return [
     "property",
     "country",
     "city",
+    "page"
 
 
 

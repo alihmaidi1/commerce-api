@@ -7,7 +7,7 @@ use App\Services\repo\classes\banner;
 use App\Services\repo\classes\brand;
 use App\Services\repo\classes\category;
 use App\Services\repo\classes\city;
-use APp\Services\repo\classes\copon;
+use App\Services\repo\classes\copon;
 use App\Services\repo\classes\country;
 use App\Services\repo\classes\currency;
 use App\Services\repo\classes\page;

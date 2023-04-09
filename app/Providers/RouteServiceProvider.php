@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\banner;
 use App\Models\category;
+use App\Models\copon;
 use App\Models\country;
 use App\Models\currency;
 use App\Models\page;
@@ -142,6 +143,17 @@ class RouteServiceProvider extends ServiceProvider
             });
 
         });
+
+
+
+        Route::bind("copon",function($value){
+
+            return Cache::rememberForever("copon:".$value,function() use($value){
+
+                return copon::with("products")->findOrFail($value);
+            });
+
+        });
     }
 
     /**
@@ -169,6 +181,7 @@ class RouteServiceProvider extends ServiceProvider
 
             });
         });
+
 
 
     }
