@@ -10,7 +10,7 @@ class city extends Model
 {
     use HasFactory,HasUuids;
     public $fillable=["name","country_id","price","currency_id"];
-    public $appends=["currency","country"];
+    // public $appends=["currency","country"];
 
     public $hidden=["created_at","updated_at","country_id","currency_id"];
 

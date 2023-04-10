@@ -22,7 +22,7 @@ class slider implements sliderInterface{
         ]);
 
         Cache::pull("sliders");
-        Cache::put("slider:".$slider->id,$slider);
+
         return $slider;
 
     }
@@ -39,7 +39,7 @@ class slider implements sliderInterface{
         $slider->status=$status;
         $slider->save();
         Cache::pull("sliders");
-        Cache::put("slider:".$slider->id,$slider);
+
         return $slider;
 
     }
@@ -59,6 +59,7 @@ class slider implements sliderInterface{
 
         $url=$slider->getRawOriginal("url");
         deleteImage($url,"slider");
+        Cache::pull("sliders");
         return $slider->delete();
 
     }

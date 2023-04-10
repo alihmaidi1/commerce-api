@@ -7,7 +7,6 @@ use App\Http\Requests\brand\update;
 use App\Models\brand;
 use App\Services\repo\interfaces\brandInterface;
 use App\Services\repo\interfaces\tempInterface;
-use Illuminate\Http\Request;
 
 class brandController extends Controller
 {
@@ -20,6 +19,7 @@ class brandController extends Controller
      public function __construct(brandInterface $brand,tempInterface $temp){
 
         $this->middleware(["auth:api","can:brand"])->except(["index","show"]);
+        $this->middleware("checkCurrency")->only(["index","show"]);
         $this->brand=$brand;
         $this->temp=$temp;
 
@@ -30,14 +30,6 @@ class brandController extends Controller
         //
 
         return response()->json($this->brand->getAllbrand());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -66,13 +58,6 @@ class brandController extends Controller
         return response()->json($brand);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(brand $brand)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

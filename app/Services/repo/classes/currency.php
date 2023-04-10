@@ -20,7 +20,6 @@ class currency implements currencyInterface{
         ]);
 
         Cache::pull("currencies");
-        Cache::put("currency:".$currency->id,$currency);
         return $currency;
     }
 
@@ -33,7 +32,7 @@ class currency implements currencyInterface{
         $currency->value=$value;
         $currency->save();
         Cache::pull("currencies");
-        Cache::put("currency:".$currency->id,$currency);
+
         return $currency;
 
     }
@@ -53,7 +52,7 @@ class currency implements currencyInterface{
         $currency1=$currency;
         $currency->delete();
         Cache::pull("currencies");
-        Cache::pull("currency:".$currency1->id);
+
         return $currency1;
 
 

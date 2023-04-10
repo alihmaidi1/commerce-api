@@ -25,7 +25,7 @@ class category implements categoryInterface{
             "parent_id"=>$parent_id
         ]);
         Cache::pull("categories");
-        Cache::put("category:".$category->id,$category);
+
         return $category;
 
 
@@ -44,7 +44,6 @@ class category implements categoryInterface{
         $category->meta_logo=$meta_logo;
         $category->save();
         Cache::pull("categories");
-        Cache::put("category:".$category->id,$category);
         return $category;
     }
 
@@ -52,7 +51,7 @@ class category implements categoryInterface{
 
         return Cache::rememberForever("categories",function(){
 
-            return ModelsCategory::where("parent_id",null)->get();
+            return ModelsCategory::tree();
 
         });
     }
@@ -64,6 +63,7 @@ class category implements categoryInterface{
         $meta_logo=$category->getRawOriginal("meta_logo");
         deleteImage($url,"category");
         deleteImage($meta_logo,"category");
+        Cache::pull("categories");
         return $category->delete();
 
 

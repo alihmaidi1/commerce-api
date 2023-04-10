@@ -76,9 +76,7 @@ class coponController extends Controller
     public function destroy(copon $copon)
     {
 
-
         $this->copon->deleteCopon($copon);
-
         return response()->json();
     }
 }

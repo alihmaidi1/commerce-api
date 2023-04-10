@@ -21,25 +21,18 @@ class categoryController extends Controller
     public function __construct(categoryInterface $category,tempInterface $temp){
 
         $this->middleware(["auth:api","can:category"])->except(["index","show"]);
-
+        $this->middleware("checkCurrency")->only(["show","index","update"]);
         $this->temp=$temp;
         $this->category=$category;
 
     }
-    public function index()
+    public function index(Request $request)
     {
 
         return response()->json($this->category->getallcategory());
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -82,13 +75,6 @@ class categoryController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(category $category)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

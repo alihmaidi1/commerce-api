@@ -11,12 +11,14 @@ class country extends Model
     use HasFactory,HasUuids;
     public $fillable=["name"];
 
-    public $with=["citys"];
+    // public $with=["citys"];
 
     public function citys(){
 
         return $this->hasMany(city::class,"country_id");
     }
+
+
 
     public $hidden=["created_at","updated_at"];
 

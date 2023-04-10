@@ -42,7 +42,7 @@ class country implements countryInterface{
         return Cache::rememberForever("countries",function(){
 
 
-            return ModelsCountry::all();
+            return ModelsCountry::with("citys:id,name,country_id")->get();
 
         });
     }

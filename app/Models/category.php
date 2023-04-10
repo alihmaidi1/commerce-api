@@ -10,11 +10,10 @@ class category extends Model
 {
     use HasFactory,HasUuids;
 
-    public $with=["childs"];
 
-    public $fillable=["name","status","rank","description","meta_description","meta_title","url","meta_logo","parent_id","parent_id"];
+    public $fillable=["name","status","rank","description","meta_description","meta_title","url","meta_logo","parent_id"];
 
-    public $hidden=["created_at","updated_at"];
+    public $hidden=["created_at","updated_at","parent_id"];
 
     public function childs(){
 
@@ -22,6 +21,40 @@ class category extends Model
 
     }
 
+    public static function  tree(){
+
+
+        $allCategory=self::all();
+        $rootCategories=$allCategory->whereNull("parent_id");
+
+        self::formatTree($rootCategories,$allCategory);
+        return $rootCategories;
+
+    }
+
+
+    public static function formatTree($categories,$allCategory){
+
+
+        foreach($categories as $category){
+
+            $category->childs=$allCategory->where("parent_id",$category->id)->values();
+
+            if($category->childs->isNotEmpty()){
+
+                self::formatTree($category->childs,$allCategory);
+
+            }
+        }
+
+
+    }
+
+    public function getChildsAtrribute(){
+
+        return self::tree();
+
+    }
 
     public function parent(){
 

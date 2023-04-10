@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\banner;
+use App\Models\brand;
 use App\Models\category;
 use App\Models\copon;
 use App\Models\country;
@@ -80,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("category:".$value,function() use($value){
 
-                return category::findOrFail($value);
+                return category::with(["products","childs"])->findOrFail($value);
             });
 
         });
@@ -89,7 +90,11 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("country:".$value,function() use($value){
 
-                return country::findOrFail($value);
+                return country::with(["citys"=>function($q){
+
+                    $q->select("id","name");
+
+                }])->findOrFail($value);
             });
 
         });
@@ -119,6 +124,15 @@ class RouteServiceProvider extends ServiceProvider
             return Cache::rememberForever("tag:".$value,function() use($value){
 
                 return tag::findOrFail($value);
+            });
+
+        });
+
+        Route::bind("brand",function($value){
+
+            return Cache::rememberForever("brand:".$value,function() use($value){
+
+                return brand::with("products")->findOrFail($value);
             });
 
         });

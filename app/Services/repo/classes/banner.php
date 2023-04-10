@@ -22,8 +22,6 @@ class banner implements bannerInterface{
 
         ]);
         Cache::pull("banners");
-        Cache::put("banner:".$banner->id,$banner);
-
         return $banner;
     }
 
@@ -36,7 +34,6 @@ class banner implements bannerInterface{
         $banner->show=$show;
         $banner->save();
         Cache::pull("banners");
-        Cache::put("banner:".$banner->id,$banner);
         return $banner;
     }
 
@@ -56,6 +53,7 @@ class banner implements bannerInterface{
 
         $url=$banner->getRawOriginal("url");
         deleteImage($url,"banner");
+        Cache::pull("banners");
         return $banner->delete();
 
 

@@ -43,7 +43,7 @@ class brand implements brandInterface{
         return Cache::rememberForever("brands",function(){
 
 
-            return ModelsBrand::all();
+            return ModelsBrand::with("products")->get();
         });
     }
 
