@@ -26,7 +26,8 @@ class UpdateRequest extends FormRequest
             "name"=>"required",
             "email"=>"required|email|unique:admins,email",
             "password"=>"required",
-            "phone"=>"required|unique:admins,phone"
+            "phone"=>"required|unique:admins,phone",
+            "role_id"=>"required|exists:roles,id"
 
 
         ];

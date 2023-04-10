@@ -23,7 +23,6 @@ class admin implements adminInterface{
         $admin=ModelsAdmin::where("email",$email)->first();
         $admin->code=$code;
         $admin->save();
-
         return $admin;
     }
     public function UpdateCodeByPhone($phone,$code){
@@ -31,7 +30,6 @@ class admin implements adminInterface{
         $admin=ModelsAdmin::where("phone",$phone)->first();
         $admin->code=$code;
         $admin->save();
-
         return $admin;
 
     }
@@ -69,10 +67,8 @@ class admin implements adminInterface{
         ]);
 
         Cache::pull("admins");
-        Cache::put("admin:".$admin->id,$admin);
-
+        $admin->role;
         return $admin;
-
     }
 
     public function updateAdmin($admin,$name,$email,$password,$role_id,$phone){
@@ -83,9 +79,8 @@ class admin implements adminInterface{
         $admin->role_id=$role_id;
         $admin->phone=$phone;
         $admin->save();
-
+        $admin->role;
         Cache::pull("admins");
-        Cache::put("admin:".$admin->id,$admin);
         return $admin;
 
     }
@@ -94,7 +89,7 @@ class admin implements adminInterface{
     public function getAllAdmin(){
 
 
-        return ModelsAdmin::where("id","!=",auth("api")->user()->id)->get();
+        return ModelsAdmin::with("role")->where("id","!=",auth("api")->user()->id)->get();
     }
 
     public function deleteAdmin($admin){

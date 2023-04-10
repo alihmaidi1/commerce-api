@@ -86,8 +86,7 @@ class admin extends Controller
         auth("api")->user()->token()->revoke();
         $admin=$this->admin->changePassword($id,$password);
         $admin->tokens=tokenInfo($admin->email,$password,"admins");
-        return response()->json([$admin]);
-
+        return response()->json(["message"=>"the password was changed successfully"]);
 
 
     }

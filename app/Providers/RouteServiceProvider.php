@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\admin;
 use App\Models\banner;
 use App\Models\brand;
 use App\Models\category;
@@ -165,6 +166,17 @@ class RouteServiceProvider extends ServiceProvider
             });
 
         });
+
+
+        Route::bind("admin",function($value){
+
+            return Cache::rememberForever("admin".$value,function() use($value){
+
+                return admin::with("role")->findOrFail($value);
+            });
+
+        });
+
     }
 
     /**

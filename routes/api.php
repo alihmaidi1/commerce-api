@@ -29,7 +29,6 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("/verifiedcode",[admin::class,"verifiedcode"])->middleware(["throttle:reset","auth:reset_admin"]);
 
 
-
     Route::apiResource("currency",currencyController::class);
     Route::apiResource("slider",sliderController::class);
     Route::apiResource("banner",bannerController::class);

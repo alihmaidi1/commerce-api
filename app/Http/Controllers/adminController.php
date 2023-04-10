@@ -13,6 +13,7 @@ class adminController extends Controller
     public $admin;
     public function __construct(adminInterface $admin){
 
+        $this->middleware("auth:api");
         $this->admin=$admin;
 
     }
