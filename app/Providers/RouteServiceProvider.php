@@ -10,6 +10,7 @@ use App\Models\country;
 use App\Models\currency;
 use App\Models\page;
 use App\Models\product;
+use App\Models\property;
 use App\Models\role;
 use App\Models\slider;
 use App\Models\tag;
@@ -99,7 +100,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("property:".$value,function() use($value){
 
-                return country::with("products")->findOrFail($value);
+                return property::with("products")->findOrFail($value);
             });
 
         });
