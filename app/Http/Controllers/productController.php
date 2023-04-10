@@ -28,6 +28,7 @@ class productController extends Controller
     public function __construct(productInterface $product,tempInterface $temp){
 
         $this->middleware(["auth:api","can:product"])->except(["index","show"]);
+        $this->middleware("checkCurrency")->except("destroy");
         $this->product=$product;
         $this->temp=$temp;
 

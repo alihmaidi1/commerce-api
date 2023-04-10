@@ -6,7 +6,6 @@ use App\Http\Requests\copon\store;
 use App\Http\Requests\copon\update;
 use App\Models\copon;
 use App\Services\repo\interfaces\coponInterface;
-use Illuminate\Http\Request;
 
 class coponController extends Controller
 {
@@ -14,6 +13,7 @@ class coponController extends Controller
     public $copon;
     public function __construct(coponInterface $copon){
 
+        $this->middleware("checkCurrency")->except("destroy");
         $this->copon=$copon;
 
     }

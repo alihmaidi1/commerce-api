@@ -11,20 +11,20 @@ class product extends Model
     use HasFactory,HasUuids;
 
     // meta_logo is exists in this table
-    public $appends=["properties","images","tags"];
+    // public $appends=["properties","images","tags"];
 
 
-    public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail"];
+    public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail","copon_id"];
 
-    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id"];
-
-
-    public function getPropertiesAttribute(){
+    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id","copon_id"];
 
 
-        return $this->properties()->get();
+    // public function getPropertiesAttribute(){
 
-    }
+
+    //     return $this->properties()->get();
+
+    // }
     public function getMetaLogoAttribute($value){
 
         $arr=[];
@@ -85,10 +85,10 @@ class product extends Model
     }
 
 
-    public function getImagesAttribute(){
+    // public function getImagesAttribute(){
 
-        return $this->images()->get();
-    }
+    //     return $this->images()->get();
+    // }
 
 
     public function tags(){
@@ -99,10 +99,10 @@ class product extends Model
     }
 
 
-    public function getTagsAttribute(){
+    // public function getTagsAttribute(){
 
-        return $this->tags()->get();
-    }
+    //     return $this->tags()->get();
+    // }
 
     public function copon(){
 
