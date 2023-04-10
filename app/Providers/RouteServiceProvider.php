@@ -81,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("category:".$value,function() use($value){
 
-                return category::with(["products","childs"])->findOrFail($value);
+                return category::getCategory($value);
             });
 
         });

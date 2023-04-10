@@ -24,13 +24,50 @@ class category extends Model
     public static function  tree(){
 
 
-        $allCategory=self::all();
+        $allCategory=self::with("products")->get();
         $rootCategories=$allCategory->whereNull("parent_id");
 
         self::formatTree($rootCategories,$allCategory);
         return $rootCategories;
 
     }
+
+    public static function getCategory($id){
+
+        $rootCategories=self::tree();
+        return self::formatGetTree($rootCategories,$id);
+
+    }
+
+    public static function formatGetTree($rootCategories,$id){
+
+
+        foreach($rootCategories as $rootCategory){
+
+            if($rootCategory->id==$id){
+
+                return $rootCategory;
+            }
+
+            if($rootCategory->childs->count()!=0){
+
+
+            $category=self::formatGetTree($rootCategory->childs,$id);
+            if($category!=null){
+
+                return $category;
+            }
+
+            }
+
+
+        }
+        return null;
+
+    }
+
+
+
 
 
     public static function formatTree($categories,$allCategory){
@@ -47,12 +84,6 @@ class category extends Model
             }
         }
 
-
-    }
-
-    public function getChildsAtrribute(){
-
-        return self::tree();
 
     }
 
