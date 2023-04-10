@@ -140,7 +140,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("role:".$value,function() use($value){
 
-                return role::findOrFail($value);
+                return role::with("admins")->findOrFail($value);
             });
 
         });

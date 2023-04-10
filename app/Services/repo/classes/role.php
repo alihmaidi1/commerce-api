@@ -21,8 +21,6 @@ class role implements roleInterface{
         ]);
 
         Cache::pull("roles");
-        Cache::put("role:".$role->id,$role);
-
         return $role;
 
     }
@@ -34,7 +32,6 @@ class role implements roleInterface{
         $role->permissions=json_encode($permissions);
         $role->save();
         Cache::pull("roles");
-        Cache::put("rule:".$role->id,$role);
         return $role;
 
 
@@ -46,7 +43,7 @@ class role implements roleInterface{
         return Cache::rememberForever("roles",function(){
 
 
-            return ModelsRole::all();
+            return ModelsRole::with("admins")->get();
 
         });
     }
@@ -55,7 +52,6 @@ class role implements roleInterface{
 
 
         Cache::pull("roles");
-        Cache::pull("role:".$role->id);
         $role->delete();
 
     }

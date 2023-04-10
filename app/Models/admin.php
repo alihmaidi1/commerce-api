@@ -12,7 +12,7 @@ class admin extends Authenticatable implements JWTSubject
 {
     use HasFactory,HasUuids,HasApiTokens;
 
-    public $appends=["role"];
+    // public $appends=["role"];
 
     public $fillable=["name","email","password","phone","role_id"];
 
@@ -25,12 +25,12 @@ class admin extends Authenticatable implements JWTSubject
     }
 
 
-    public function getRoleAttribute(){
+    // public function getRoleAttribute(){
 
 
-        return $this->role()->first();
+    //     return $this->role()->first();
 
-    }
+    // }
     public function getJWTCustomClaims()
     {
         return [];
