@@ -16,7 +16,6 @@ class page implements pageInterface{
             "content"=>$content,
             "url"=>$url
         ]);
-        Cache::put("page:".$page->id,$page);
         Cache::pull("pages");
         return $page;
 
@@ -30,7 +29,6 @@ class page implements pageInterface{
         $page->content=$content;
         $page->url=$url;
         $page->save();
-        Cache::put("page:".$page,$page);
         Cache::pull("pages");
         return $page;
 
