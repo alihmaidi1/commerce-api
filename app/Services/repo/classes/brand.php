@@ -18,7 +18,6 @@ class brand implements brandInterface{
 
         ]);
         Cache::pull("brands");
-        Cache::put("brand:".$brand->id,$brand);
         return $brand;
 
     }
@@ -31,7 +30,6 @@ class brand implements brandInterface{
         $brand->name=$name;
         $brand->save();
         Cache::pull("brands");
-        Cache::put("brand:".$brand->id,$brand);
         return $brand;
 
 
@@ -51,6 +49,7 @@ class brand implements brandInterface{
 
         $url=$brand->getRawOriginal("url");
         deleteImage($url,"brand");
+        Cache::pull("brands");
         return $brand->delete();
 
 
