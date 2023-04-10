@@ -6,7 +6,6 @@ use App\Http\Requests\country\store;
 use App\Http\Requests\country\update;
 use App\Models\country;
 use App\Services\repo\interfaces\countryInterface;
-use Illuminate\Http\Request;
 
 class countryController extends Controller
 {
@@ -20,20 +19,13 @@ class countryController extends Controller
 
 
         $this->middleware(["auth:api","can:country"])->except(["index","show"]);
+        $this->middleware("checkCurrency")->only(["update","show","index"]);
         $this->country=$country;
 
      }
     public function index()
     {
         return response()->json($this->country->getAllCountry());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -57,13 +49,6 @@ class countryController extends Controller
         return response()->json($country);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(country $country)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

@@ -6,7 +6,6 @@ use App\Http\Requests\city\store;
 use App\Http\Requests\city\update;
 use App\Models\city;
 use App\Services\repo\interfaces\cityInterface;
-use Illuminate\Http\Request;
 
 class cityController extends Controller
 {
@@ -17,7 +16,7 @@ class cityController extends Controller
      public $city;
      public function __construct(cityInterface $city){
 
-
+        $this->middleware("checkCurrency")->only(["store","update"]);
         $this->city=$city;
 
      }
@@ -45,7 +44,6 @@ class cityController extends Controller
         $currency_id=$request->currency_id;
         $country_id=$request->country_id;
         $city=$this->city->store($name,$country_id,$price,$currency_id);
-
         return response()->json($city);
 
 

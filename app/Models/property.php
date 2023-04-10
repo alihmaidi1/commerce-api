@@ -18,7 +18,6 @@ class property extends Model
     public function products(){
 
 
-        // return $this->belongsToMany(product::class,property_product::class);
         return $this->belongsToMany(product::class,property_product::class,"property_id","product_id")->using(property_product::class);
 
     }

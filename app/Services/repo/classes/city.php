@@ -22,7 +22,6 @@ class city implements cityInterface{
 
         ]);
         Cache::pull("citys");
-        Cache::put("city:".$city->id,$city);
         return $city;
     }
 
@@ -35,7 +34,6 @@ class city implements cityInterface{
         $city->country_id=$country_id;
         $city->save();
         Cache::pull("citys");
-        Cache::put("city:".$city->id,$city);
         return $city;
 
 
@@ -47,7 +45,6 @@ class city implements cityInterface{
         $city1=$city;
         $city->delete();
         Cache::pull("citys");
-        Cache::pull("city:".$city->id);
         return response()->json($city1);
 
 

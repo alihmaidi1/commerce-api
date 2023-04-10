@@ -90,11 +90,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("country:".$value,function() use($value){
 
-                return country::with(["citys"=>function($q){
-
-                    $q->select("id","name");
-
-                }])->findOrFail($value);
+                return country::with("citys:id,name,country_id,price")->findOrFail($value);
             });
 
         });
@@ -103,7 +99,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("property:".$value,function() use($value){
 
-                return country::findOrFail($value);
+                return country::with("products")->findOrFail($value);
             });
 
         });

@@ -11,7 +11,6 @@ class country extends Model
     use HasFactory,HasUuids;
     public $fillable=["name"];
 
-    // public $with=["citys"];
 
     public function citys(){
 

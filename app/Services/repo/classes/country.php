@@ -20,7 +20,6 @@ class country implements countryInterface{
         ]);
 
         Cache::pull("countries");
-        Cache::put("country:".$country->id,$country);
 
         return $country;
     }
@@ -31,7 +30,6 @@ class country implements countryInterface{
         $country->name=$name;
         $country->save();
         Cache::pull("countries");
-        Cache::put("country:".$country->id,$country);
         return $country;
     }
 
@@ -42,7 +40,7 @@ class country implements countryInterface{
         return Cache::rememberForever("countries",function(){
 
 
-            return ModelsCountry::with("citys:id,name,country_id")->get();
+            return ModelsCountry::with("citys:id,name,country_id,price")->get();
 
         });
     }
@@ -53,7 +51,6 @@ class country implements countryInterface{
         $country1=$country;
         $country->delete();
         Cache::pull("countries");
-        Cache::pull("country:".$country1->id);
         return $country1;
 
     }

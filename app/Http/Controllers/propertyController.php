@@ -14,6 +14,7 @@ class propertyController extends Controller
     public function __construct(propertyInterface $property){
 
         $this->middleware(["auth:api","can:property"])->except(["index","show"]);
+        $this->middleware("checkCurrency")->only(["update","show","index"]);
         $this->property=$property;
 
     }
@@ -27,13 +28,6 @@ class propertyController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -59,14 +53,6 @@ class propertyController extends Controller
 
         return response()->json($property);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(property $property)
-    {
-        //
     }
 
     /**
