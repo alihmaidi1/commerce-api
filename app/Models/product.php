@@ -14,7 +14,7 @@ class product extends Model
 
     public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail","copon_id"];
 
-    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id","copon_id","currency"];
+    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id","copon_id","currency","pivot"];
 
 
     public function getPriceAttribute($value){

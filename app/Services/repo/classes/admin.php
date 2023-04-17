@@ -13,7 +13,7 @@ class admin implements adminInterface{
 
         // return Cache::rememberForever("admin:".$email,function(){
 
-            return ModelsAdmin::with(["role"])->first();
+            return ModelsAdmin::with(["role"])->where("email",$email)->first();
 
         // });
     }

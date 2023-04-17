@@ -35,7 +35,16 @@ class property implements propertyInterface{
         // return Cache::rememberForever("properties",function(){
 
 
-            return ModelsProperty::with("products")->get();
+            return ModelsProperty::with(["products"=>function($query){
+
+                if(request("product_number")!=null){
+
+
+                    $query->limit(request("product_number"));
+
+                }
+
+            }])->get();
 
         // });
     }

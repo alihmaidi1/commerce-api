@@ -24,7 +24,16 @@ class category extends Model
     public static function  tree(){
 
 
-        $allCategory=self::with("products")->get();
+
+        $allCategory=self::with(["products"=>function($query){
+
+            if(request("product_number")!=null){
+
+                $query->limit(request("product_number"));
+
+            }
+
+        }])->get();
         $rootCategories=$allCategory->whereNull("parent_id");
 
         self::formatTree($rootCategories,$allCategory);
@@ -34,7 +43,9 @@ class category extends Model
 
     public static function getCategory($id){
 
+
         $rootCategories=self::tree();
+        // return $rootCategories;
         return self::formatGetTree($rootCategories,$id);
 
     }
@@ -43,6 +54,7 @@ class category extends Model
 
 
         foreach($rootCategories as $rootCategory){
+
 
             if($rootCategory->id==$id){
 

@@ -41,7 +41,16 @@ class brand implements brandInterface{
         // return Cache::rememberForever("brands",function(){
 
 
-            return ModelsBrand::with("products")->get();
+            return ModelsBrand::with(["products"=>function($query){
+
+
+                if(request("product_number")!=null){
+
+                    $query->limit(request("product_number"));
+                }
+
+
+            }])->get();
         // });
     }
 

@@ -40,7 +40,14 @@ class country implements countryInterface{
         // return Cache::rememberForever("countries",function(){
 
 
-            return ModelsCountry::with("citys:id,name,country_id,price")->get();
+            return ModelsCountry::with(["citys"=>function($query){
+
+                if(request("city_number")!=null){
+
+                    $query->limit(request("city_number"));
+                }
+
+            }])->get();
 
         // });
     }

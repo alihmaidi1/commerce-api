@@ -67,10 +67,12 @@ class categoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(request $request)
     {
 
 
+
+        $category=category::getCategory($request->category);
         return response()->json($category);
 
     }

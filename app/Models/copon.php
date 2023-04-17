@@ -11,20 +11,33 @@ class copon extends Model
     use HasFactory,HasUuids;
 
     public $fillable=["name","type","value","currency_id","end_at"];
-    public $hidden=["created_at","updated_at","currency_id"];
+    public $hidden=["created_at","updated_at","currency_id","currency"];
 
-    public $appends=["currency"];
+    public $with=["currency"];
 
+
+    public function getPriceAttribute($value){
+
+        if($this->type!="precent"){
+
+        $productCurrencyValue=$this->currency->value;
+        $CurrencyUserValue=request()->currency->value;
+        $priceInDular=$value/$productCurrencyValue;
+        return $priceInDular*$CurrencyUserValue;
+
+
+        }
+
+
+        return $value;
+
+
+    }
     public function currency(){
 
         return $this->belongsTo(currency::class,"currency_id");
 
 
-    }
-
-    public function getCurrencyAttribute(){
-
-        return $this->currency()->first();
     }
 
     public function products(){

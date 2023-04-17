@@ -52,66 +52,80 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind("currency",function($value){
 
-            return Cache::rememberForever("currency:".$value,function() use($value){
+            // return Cache::rememberForever("currency:".$value,function() use($value){
 
                 return currency::findOrFail($value);
-            });
+            // });
 
         });
 
         Route::bind("slider",function($value){
 
-            return Cache::rememberForever("slider:".$value,function() use($value){
+            // return Cache::rememberForever("slider:".$value,function() use($value){
 
                 return slider::findOrFail($value);
-            });
+            // });
 
         });
 
 
         Route::bind("banner",function($value){
 
-            return Cache::rememberForever("banner:".$value,function() use($value){
+            // return Cache::rememberForever("banner:".$value,function() use($value){
 
                 return banner::findOrFail($value);
-            });
+            // });
 
         });
 
 
-        Route::bind("category",function($value){
+        // Route::bind("category",function($value){
 
-            return Cache::rememberForever("category:".$value,function() use($value){
+        //     return Cache::rememberForever("category:".$value,function() use($value){
 
-                return category::getCategory($value);
-            });
+        //         return category::getCategory($value);
+        //     });
 
-        });
+        // });
 
         Route::bind("country",function($value){
 
-            return Cache::rememberForever("country:".$value,function() use($value){
+            // return Cache::rememberForever("country:".$value,function() use($value){
 
-                return country::with("citys:id,name,country_id,price")->findOrFail($value);
-            });
+                return country::with(["citys"=>function($query){
+
+                    if(request("city_number")!=null){
+
+                        $query->limit(request("city_number"));
+                    }
+
+                }])->findOrFail($value);
+            // });
 
         });
 
         Route::bind("property",function($value){
 
-            return Cache::rememberForever("property:".$value,function() use($value){
+            // return Cache::rememberForever("property:".$value,function() use($value){
 
-                return property::with("products")->findOrFail($value);
-            });
+                return property::with(["products"=>function($query){
+
+                    if(request("product_number")!=null){
+
+                        $query->limit(request("product_number"));
+                    }
+
+                }])->findOrFail($value);
+            // });
 
         });
 
         Route::bind("product",function($value){
 
-            return Cache::rememberForever("product:".$value,function() use($value){
+            // return Cache::rememberForever("product:".$value,function() use($value){
 
                 return product::with(["tags","images","properties"]) ->findOrFail($value);
-            });
+            // });
 
         });
 
@@ -119,19 +133,29 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind("tag",function($value){
 
-            return Cache::rememberForever("tag:".$value,function() use($value){
+            // return Cache::rememberForever("tag:".$value,function() use($value){
 
                 return tag::findOrFail($value);
-            });
+            // });
 
         });
 
         Route::bind("brand",function($value){
 
-            return Cache::rememberForever("brand:".$value,function() use($value){
+            // return Cache::rememberForever("brand:".$value,function() use($value){
 
-                return brand::with("products")->findOrFail($value);
-            });
+                return brand::with(["products"=>function($query){
+
+
+                    if(request("product_number")!=null){
+
+                        $query->limit(request("product_number"));
+                    }
+
+
+                }])->findOrFail($value);
+
+            // });
 
         });
 
@@ -139,20 +163,20 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind("role",function($value){
 
-            return Cache::rememberForever("role:".$value,function() use($value){
+            // return Cache::rememberForever("role:".$value,function() use($value){
 
                 return role::with("admins")->findOrFail($value);
-            });
+            // });
 
         });
 
 
         Route::bind("page",function($value){
 
-            return Cache::rememberForever("page:".$value,function() use($value){
+            // return Cache::rememberForever("page:".$value,function() use($value){
 
                 return page::findOrFail($value);
-            });
+            // });
 
         });
 
@@ -160,20 +184,20 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind("copon",function($value){
 
-            return Cache::rememberForever("copon:".$value,function() use($value){
+            // return Cache::rememberForever("copon:".$value,function() use($value){
 
                 return copon::with("products")->findOrFail($value);
-            });
+            // });
 
         });
 
 
         Route::bind("admin",function($value){
 
-            return Cache::rememberForever("admin".$value,function() use($value){
+            // return Cache::rememberForever("admin".$value,function() use($value){
 
                 return admin::with("role")->findOrFail($value);
-            });
+            // });
 
         });
 

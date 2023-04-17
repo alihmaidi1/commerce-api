@@ -9,26 +9,39 @@ use Illuminate\Database\Eloquent\Model;
 class city extends Model
 {
     use HasFactory,HasUuids;
+    public $with=["currency"];
     public $fillable=["name","country_id","price","currency_id"];
     // public $appends=["currency","country"];
 
-    public $hidden=["created_at","updated_at","country_id","currency_id"];
+    public $hidden=["created_at","updated_at","country_id","currency_id","currency"];
 
 
-    public function getCurrencyAttribute(){
+
+    public function getPriceAttribute($value){
 
 
-        return $this->currency()->first();
+
+        $productCurrencyValue=$this->currency->value;
+        $CurrencyUserValue=request()->currency->value;
+        $priceInDular=$value/$productCurrencyValue;
+        return $priceInDular*$CurrencyUserValue;
+
 
     }
+    // public function getCurrencyAttribute(){
 
 
-    public function getCountryAttribute(){
+    //     return $this->currency()->first();
+
+    // }
 
 
-        return $this->country()->without("citys")->first();
+    // public function getCountryAttribute(){
 
-    }
+
+    //     return $this->country()->without("citys")->first();
+
+    // }
 
     public function country(){
 
