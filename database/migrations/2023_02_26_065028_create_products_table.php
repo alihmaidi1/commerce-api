@@ -31,7 +31,7 @@ return new class extends Migration
             $table->uuid("brand_id");
             $table->foreign("brand_id")->references("id")->on("brands")->onDelete("cascade")->onUpdate("cascade");
             $table->string("thumbnail");
-            $table->uuid("copon_id");
+            $table->uuid("copon_id")->nullable();
             $table->foreign("copon_id")->references("id")->on("copons")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });

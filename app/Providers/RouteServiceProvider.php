@@ -110,7 +110,7 @@ class RouteServiceProvider extends ServiceProvider
 
             return Cache::rememberForever("product:".$value,function() use($value){
 
-                return product::findOrFail($value);
+                return product::with(["tags","images","properties"]) ->findOrFail($value);
             });
 
         });

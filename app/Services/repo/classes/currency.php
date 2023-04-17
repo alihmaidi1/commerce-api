@@ -19,7 +19,7 @@ class currency implements currencyInterface{
 
         ]);
 
-        Cache::pull("currencies");
+        // Cache::pull("currencies");
         return $currency;
     }
 
@@ -31,7 +31,7 @@ class currency implements currencyInterface{
         $currency->code=$code;
         $currency->value=$value;
         $currency->save();
-        Cache::pull("currencies");
+        // Cache::pull("currencies");
 
         return $currency;
 
@@ -40,10 +40,10 @@ class currency implements currencyInterface{
     public function getAllCurrency(){
 
 
-        return Cache::rememberForever("currencies",function(){
+        // return Cache::rememberForever("currencies",function(){
 
             return ModelsCurrency::all();
-        });
+        // });
     }
 
     public function deleteCurrency($currency){
@@ -51,7 +51,7 @@ class currency implements currencyInterface{
 
         $currency1=$currency;
         $currency->delete();
-        Cache::pull("currencies");
+        // Cache::pull("currencies");
 
         return $currency1;
 

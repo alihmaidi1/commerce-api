@@ -19,7 +19,7 @@ class countryController extends Controller
 
 
         $this->middleware(["auth:api","can:country"])->except(["index","show"]);
-        $this->middleware("checkCurrency")->only(["update","show","index"]);
+        $this->middleware("getCurrency")->only(["update","show","index"]);
         $this->country=$country;
 
      }

@@ -21,7 +21,7 @@ class slider implements sliderInterface{
 
         ]);
 
-        Cache::pull("sliders");
+        // Cache::pull("sliders");
 
         return $slider;
 
@@ -38,7 +38,7 @@ class slider implements sliderInterface{
         $slider->ranks=$rank;
         $slider->status=$status;
         $slider->save();
-        Cache::pull("sliders");
+        // Cache::pull("sliders");
 
         return $slider;
 
@@ -47,10 +47,10 @@ class slider implements sliderInterface{
 
     public function getAllSlider(){
 
-        return Cache::rememberForever("sliders",function(){
+        // return Cache::rememberForever("sliders",function(){
 
             return ModelsSlider::all();
-        });
+        // });
     }
 
     public function deleteSlider($slider){
@@ -59,7 +59,7 @@ class slider implements sliderInterface{
 
         $url=$slider->getRawOriginal("url");
         deleteImage($url,"slider");
-        Cache::pull("sliders");
+        // Cache::pull("sliders");
         return $slider->delete();
 
     }

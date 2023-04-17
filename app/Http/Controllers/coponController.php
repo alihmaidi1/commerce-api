@@ -13,7 +13,7 @@ class coponController extends Controller
     public $copon;
     public function __construct(coponInterface $copon){
 
-        $this->middleware("checkCurrency")->except("destroy");
+        $this->middleware("getCurrency")->except("destroy");
         $this->copon=$copon;
 
     }

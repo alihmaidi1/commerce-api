@@ -22,7 +22,7 @@ class copon implements coponInterface{
 
         ]);
 
-        Cache::pull("copons");
+        // Cache::pull("copons");
 
         return $copon;
 
@@ -40,7 +40,7 @@ class copon implements coponInterface{
         $copon->currency_id=$currency_id;
         $copon->end_at=$end_at;
         $copon->save();
-        Cache::pull("copons");
+        // Cache::pull("copons");
         return $copon;
 
 
@@ -50,17 +50,17 @@ class copon implements coponInterface{
     public function getAllCopon(){
 
 
-        return Cache::rememberForever("copons",function(){
+        // return Cache::rememberForever("copons",function(){
 
             return ModelsCopon::with("products")->get();
 
-        });
+        // });
     }
 
     public function deleteCopon($copon){
 
 
-        Cache::pull("copons");
+        // Cache::pull("copons");
         $copon->delete();
 
 

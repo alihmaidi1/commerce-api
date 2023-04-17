@@ -20,7 +20,7 @@ class role implements roleInterface{
 
         ]);
 
-        Cache::pull("roles");
+        // Cache::pull("roles");
         return $role;
 
     }
@@ -31,7 +31,7 @@ class role implements roleInterface{
         $role->name=$name;
         $role->permissions=json_encode($permissions);
         $role->save();
-        Cache::pull("roles");
+        // Cache::pull("roles");
         return $role;
 
 
@@ -40,18 +40,18 @@ class role implements roleInterface{
     public function getAllRole(){
 
 
-        return Cache::rememberForever("roles",function(){
+        // return Cache::rememberForever("roles",function(){
 
 
             return ModelsRole::with("admins")->get();
 
-        });
+        // });
     }
 
     public function deleteRole($role){
 
 
-        Cache::pull("roles");
+        // Cache::pull("roles");
         $role->delete();
 
     }

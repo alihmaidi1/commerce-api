@@ -19,7 +19,7 @@ class brandController extends Controller
      public function __construct(brandInterface $brand,tempInterface $temp){
 
         $this->middleware(["auth:api","can:brand"])->except(["index","show"]);
-        $this->middleware("checkCurrency")->only(["index","show","update"]);
+        $this->middleware("getCurrency")->only(["index","show","update"]);
         $this->brand=$brand;
         $this->temp=$temp;
 

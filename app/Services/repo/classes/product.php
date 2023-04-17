@@ -28,8 +28,7 @@ class product implements productInterface{
             "brand_id"=>$brand_id,
             "thumbnail"=>$thumbnail
         ]);
-        Cache::pull("products");
-        Cache::put("product:".$product->id,$product);
+        // Cache::pull("products");
 
         return $product;
 
@@ -52,8 +51,7 @@ class product implements productInterface{
         $product->brand_id=$brand_id;
         $product->thumbnail=$thumbnail;
         $product->save();
-        Cache::pull("products");
-        Cache::put("product:".$product->id,$product);
+        // Cache::pull("products");
         return $product;
 
     }
@@ -62,12 +60,12 @@ class product implements productInterface{
     public function getAllProduct(){
 
 
-        return Cache::rememberForever("products",function(){
+        // return Cache::rememberForever("products",function(){
 
 
             return ModelsProduct::all();
 
-        });
+        // });
     }
 
     public function deleteProduct($product){
@@ -77,9 +75,8 @@ class product implements productInterface{
         Storage::deleteDirectory(public_path("public/v3/".$product->id));
 
         $product->delete();
-        Cache::pull("products");
-        Cache::pull("product:".$product->id);
-
+        // Cache::pull("products");
+        // Cache::pull("product:".$product->id);
         return "true";
 
 

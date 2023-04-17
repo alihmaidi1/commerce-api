@@ -11,11 +11,11 @@ class admin implements adminInterface{
 
     public function getAdminByEmail($email){
 
-        return Cache::rememberForever("admin:".$email,function(){
+        // return Cache::rememberForever("admin:".$email,function(){
 
             return ModelsAdmin::with(["role"])->first();
 
-        });
+        // });
     }
 
     public function UpdateCodeByEmail($email,$code){
@@ -66,7 +66,7 @@ class admin implements adminInterface{
             "phone"=>$phone
         ]);
 
-        Cache::pull("admins");
+        // Cache::pull("admins");
         $admin->role;
         return $admin;
     }
@@ -80,7 +80,7 @@ class admin implements adminInterface{
         $admin->phone=$phone;
         $admin->save();
         $admin->role;
-        Cache::pull("admins");
+        // Cache::pull("admins");
         return $admin;
 
     }
@@ -96,8 +96,8 @@ class admin implements adminInterface{
 
 
         $admin->delete();
-        Cache::pull("admins");
-        Cache::pull("admin:".$admin->id);
+        // Cache::pull("admins");
+        // Cache::pull("admin:".$admin->id);
     }
 
 

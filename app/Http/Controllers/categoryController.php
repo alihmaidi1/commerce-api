@@ -21,7 +21,7 @@ class categoryController extends Controller
     public function __construct(categoryInterface $category,tempInterface $temp){
 
         $this->middleware(["auth:api","can:category"])->except(["index","show"]);
-        $this->middleware("checkCurrency")->only(["show","index","update"]);
+        $this->middleware("getCurrency")->only(["show","index","update"]);
         $this->temp=$temp;
         $this->category=$category;
 

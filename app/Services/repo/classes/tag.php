@@ -14,7 +14,7 @@ class tag implements tagInterface{
 
 
         $tag= ModelsTag::create(["name"=>$name]);
-        Cache::pull("tags");
+        // Cache::pull("tags");
         return $tag;
     }
 
@@ -23,23 +23,23 @@ class tag implements tagInterface{
 
         $tag->name=$name;
         $tag->save();
-        Cache::pull("tags");
+        // Cache::pull("tags");
         return $tag;
 
     }
 
     public function getAllTag(){
 
-        return Cache::rememberForever("tags",function(){
+        // return Cache::rememberForever("tags",function(){
 
             return ModelsTag::all();
-        });
+        // });
     }
 
 
     public function deleteTag($tag){
 
-        Cache::pull("tags");
+        // Cache::pull("tags");
         $tag->delete();
 
 

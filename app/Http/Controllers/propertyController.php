@@ -14,7 +14,7 @@ class propertyController extends Controller
     public function __construct(propertyInterface $property){
 
         $this->middleware(["auth:api","can:property"])->except(["index","show"]);
-        $this->middleware("checkCurrency")->only(["update","show","index"]);
+        $this->middleware("getCurrency")->only(["update","show","index"]);
         $this->property=$property;
 
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\image\uploadimage;
 use App\Http\Requests\image\uploadimages;
 use App\Services\repo\interfaces\tempInterface;
-use Illuminate\Http\Request;
+
 
 class imageController extends Controller
 {

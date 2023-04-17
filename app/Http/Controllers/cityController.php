@@ -16,7 +16,7 @@ class cityController extends Controller
      public $city;
      public function __construct(cityInterface $city){
 
-        $this->middleware("checkCurrency")->only(["store","update"]);
+        $this->middleware("getCurrency")->only(["store","update"]);
         $this->city=$city;
 
      }

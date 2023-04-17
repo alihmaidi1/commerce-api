@@ -21,7 +21,7 @@ class banner implements bannerInterface{
             "show"=>$show,
 
         ]);
-        Cache::pull("banners");
+        // Cache::pull("banners");
         return $banner;
     }
 
@@ -33,17 +33,17 @@ class banner implements bannerInterface{
         $banner->link=$link;
         $banner->show=$show;
         $banner->save();
-        Cache::pull("banners");
+        // Cache::pull("banners");
         return $banner;
     }
 
     public function getallbanner(){
 
-        return Cache::rememberForever("banners",function(){
+        // return Cache::rememberForever("banners",function(){
 
             return ModelsBanner::all();
 
-        });
+        // });
     }
 
 
@@ -53,7 +53,7 @@ class banner implements bannerInterface{
 
         $url=$banner->getRawOriginal("url");
         deleteImage($url,"banner");
-        Cache::pull("banners");
+        // Cache::pull("banners");
         return $banner->delete();
 
 

@@ -16,7 +16,7 @@ class page implements pageInterface{
             "content"=>$content,
             "url"=>$url
         ]);
-        Cache::pull("pages");
+        // Cache::pull("pages");
         return $page;
 
 
@@ -29,7 +29,7 @@ class page implements pageInterface{
         $page->content=$content;
         $page->url=$url;
         $page->save();
-        Cache::pull("pages");
+        // Cache::pull("pages");
         return $page;
 
     }
@@ -38,11 +38,11 @@ class page implements pageInterface{
     public function getAllPage(){
 
 
-        return Cache::rememberForever("pages",function(){
+        // return Cache::rememberForever("pages",function(){
 
             return ModelsPage::all();
 
-        });
+        // });
 
     }
 

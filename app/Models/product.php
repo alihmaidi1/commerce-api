@@ -10,14 +10,22 @@ class product extends Model
 {
     use HasFactory,HasUuids;
 
-    // meta_logo is exists in this table
-    // public $appends=["properties","images","tags"];
-
+    public $with=["currency"];
 
     public $fillable=["name","description","meta_logo","title","meta_title","meta_description","category_id","price","quantity","min_quantity","selling_number","currency_id","brand_id","thumbnail","copon_id"];
 
-    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id","copon_id"];
+    public $hidden=["created_at","updated_at","brand_id","category_id","currency_id","copon_id","currency"];
 
+
+    public function getPriceAttribute($value){
+
+
+        $productCurrencyValue=$this->currency->value;
+        $CurrencyUserValue=request()->currency->value;
+        $priceInDular=$value/$productCurrencyValue;
+        return $priceInDular*$CurrencyUserValue;
+
+    }
 
     // public function getPropertiesAttribute(){
 

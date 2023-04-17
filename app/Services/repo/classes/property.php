@@ -15,7 +15,7 @@ class property implements propertyInterface{
 
             "name"=>$name
         ]);
-        Cache::pull("properties");
+        // Cache::pull("properties");
         return $property;
 
     }
@@ -25,19 +25,19 @@ class property implements propertyInterface{
 
         $property->name=$name;
         $property->save();
-        Cache::pull("properties");
+        // Cache::pull("properties");
         return $property;
 
     }
 
     public function getAllProperty(){
 
-        return Cache::rememberForever("properties",function(){
+        // return Cache::rememberForever("properties",function(){
 
 
             return ModelsProperty::with("products")->get();
 
-        });
+        // });
     }
 
 
@@ -45,7 +45,7 @@ class property implements propertyInterface{
 
         $property1=$property;
         $property->delete();
-        Cache::pull("properties");
+        // Cache::pull("properties");
         return $property1;
 
     }

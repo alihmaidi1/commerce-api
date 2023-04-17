@@ -28,7 +28,7 @@ class productController extends Controller
     public function __construct(productInterface $product,tempInterface $temp){
 
         $this->middleware(["auth:api","can:product"])->except(["index","show"]);
-        $this->middleware("checkCurrency")->except("destroy");
+        $this->middleware("getCurrency")->except("destroy");
         $this->product=$product;
         $this->temp=$temp;
 
@@ -41,13 +41,6 @@ class productController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -59,10 +52,6 @@ class productController extends Controller
         $request->productModel=$this->product;
         $product=app(Pipeline::class)->send($request)->through([createProduct::class,storeProperty::class,storeTag::class,storeImages::class])
                 ->then(function($product){return $product;});
-
-
-
-
 
         return response()->json($product);
 
@@ -78,13 +67,6 @@ class productController extends Controller
         return response()->json($product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(product $product)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

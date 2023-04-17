@@ -17,7 +17,7 @@ class brand implements brandInterface{
             "url"=>$url
 
         ]);
-        Cache::pull("brands");
+        // Cache::pull("brands");
         return $brand;
 
     }
@@ -29,7 +29,7 @@ class brand implements brandInterface{
         $brand->url=$url;
         $brand->name=$name;
         $brand->save();
-        Cache::pull("brands");
+        // Cache::pull("brands");
         return $brand;
 
 
@@ -38,18 +38,18 @@ class brand implements brandInterface{
 
     public function getAllbrand(){
 
-        return Cache::rememberForever("brands",function(){
+        // return Cache::rememberForever("brands",function(){
 
 
             return ModelsBrand::with("products")->get();
-        });
+        // });
     }
 
     public function deleteBrand($brand){
 
         $url=$brand->getRawOriginal("url");
         deleteImage($url,"brand");
-        Cache::pull("brands");
+        // Cache::pull("brands");
         return $brand->delete();
 
 

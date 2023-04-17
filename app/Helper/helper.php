@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\currency;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -179,6 +180,19 @@ function makeDirectory($folder,$id){
         File::makeDirectory($path3, 0777);
 
     }
+
+
+}
+
+
+function convertCurrency($productCurrency,$userCurrency,$price){
+
+
+    $productCurrency=currency::find($productCurrency);
+    $userCurrency=currency::find($productCurrency);
+    $priceinDular=$price/$productCurrency->price;
+    return $priceinDular*$userCurrency->value;
+
 
 
 }

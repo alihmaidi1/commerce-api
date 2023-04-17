@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class checkCurrency
+class getCurrency
 {
     /**
      * Handle an incoming request.
@@ -16,17 +16,17 @@ class checkCurrency
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $userCurrency=request()->header("currency");
+        $currency=currency::find($userCurrency);
+        if($currency!=null){
 
-        $currency_id=$request->header("currency");
-        if($currency_id==null){
+            $request->currency=$currency;
+            return $next($request);
 
-            return response()->json(["message"=>"currency id is required"],401);
+
         }
-        $count=currency::where("id",$currency_id)->count();
-        if($count==0){
 
-            return response()->json(["message"=>"currency id is not corret"],401);
-        }
-        return $next($request);
+        return response()->json(["message"=>"currency is not correct"]);
+
     }
 }

@@ -24,7 +24,7 @@ class category implements categoryInterface{
             "meta_logo"=>$meta_logo,
             "parent_id"=>$parent_id
         ]);
-        Cache::pull("categories");
+        // Cache::pull("categories");
 
         return $category;
 
@@ -43,17 +43,17 @@ class category implements categoryInterface{
         $category->url=$url;
         $category->meta_logo=$meta_logo;
         $category->save();
-        Cache::pull("categories");
+        // Cache::pull("categories");
         return $category;
     }
 
     public function getallcategory(){
 
-        return Cache::rememberForever("categories",function(){
+        // return Cache::rememberForever("categories",function(){
 
             return ModelsCategory::tree();
 
-        });
+        // });
     }
 
     public function deletecategory($category){
@@ -63,7 +63,7 @@ class category implements categoryInterface{
         $meta_logo=$category->getRawOriginal("meta_logo");
         deleteImage($url,"category");
         deleteImage($meta_logo,"category");
-        Cache::pull("categories");
+        // Cache::pull("categories");
         return $category->delete();
 
 
