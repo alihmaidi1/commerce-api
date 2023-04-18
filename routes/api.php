@@ -18,11 +18,10 @@ use App\Http\Controllers\propertyController;
 use App\Http\Controllers\roleController;
 use App\Http\Controllers\sliderController;
 use App\Http\Controllers\tagController;
+use App\Http\Controllers\userController;
 use App\Services\repo\classes\country;
 
 Route::group(["prefix"=>"admin"],function(){
-
-
 
     Route::post("/login",[admin::class,"login"])->middleware("throttle:login");
     Route::post("/getresetmessage",[admin::class,"getresetmessage"])->middleware("throttle:reset");
@@ -68,3 +67,27 @@ Route::group(["prefix"=>"admin"],function(){
 
 Route::post('uploadimage',[imageController::class,"uploadimage"]);
 Route::post('uploadimages',[imageController::class,"uploadimages"]);
+
+
+
+
+
+
+Route::post("register",[userController::class,"register"]);
+Route::post("login",[userController::class,"login"]);
+Route::post("refreshtoken",[userController::class,"refreshtoken"]);
+
+Route::post("getresetmessage",[userController::class,"getresetmessage"]);
+
+Route::post("verifyresetcode",[userController::class,"verifyresetcode"]);
+
+
+Route::group(["middleware"=>"auth:user"],function(){
+
+
+    Route::post("verifyAccount",[userController::class,"verifyAccount"]);
+    Route::post("logout",[userController::class,"logout"]);
+    Route::post("changepassword",[userController::class,"changepassword"]);
+
+
+});

@@ -17,6 +17,7 @@ use App\Services\repo\classes\role;
 use App\Services\repo\classes\slider;
 use App\Services\repo\classes\tag;
 use App\Services\repo\classes\temp;
+use App\Services\repo\classes\user;
 use App\Services\repo\interfaces\adminInterface;
 use App\Services\repo\interfaces\bannerInterface;
 use App\Services\repo\interfaces\brandInterface;
@@ -32,6 +33,7 @@ use App\Services\repo\interfaces\roleInterface;
 use App\Services\repo\interfaces\sliderInterface;
 use App\Services\repo\interfaces\tagInterface;
 use App\Services\repo\interfaces\tempInterface;
+use App\Services\repo\interfaces\userInterface;
 use Illuminate\Support\ServiceProvider;
 
 class repo extends ServiceProvider
@@ -57,6 +59,7 @@ class repo extends ServiceProvider
         $this->app->bind(roleInterface::class,role::class);
         $this->app->bind(pageInterface::class,page::class);
         $this->app->bind(coponInterface::class,copon::class);
+        $this->app->bind(userInterface::class,user::class);
 
     }
 

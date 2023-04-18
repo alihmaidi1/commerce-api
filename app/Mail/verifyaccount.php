@@ -8,19 +8,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class resetcode extends Mailable
+class verifyaccount extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-
     public $code;
     public function __construct($code)
     {
         $this->code=$code;
     }
+
 
     /**
      * Get the message envelope.
@@ -28,7 +28,7 @@ class resetcode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Resetcode',
+            subject: 'Verifyaccount',
         );
     }
 
@@ -37,7 +37,9 @@ class resetcode extends Mailable
      */
     public function content(): Content
     {
-        return new Content(view: 'reset',with:["code"=>$this->code]);
+
+        return new Content(view: 'verify',with:["code"=>$this->code]);
+
     }
 
     /**
