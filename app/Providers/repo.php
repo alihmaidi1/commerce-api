@@ -14,6 +14,7 @@ use App\Services\repo\classes\currency;
 use App\Services\repo\classes\page;
 use App\Services\repo\classes\product;
 use App\Services\repo\classes\property;
+use App\Services\repo\classes\review;
 use App\Services\repo\classes\role;
 use App\Services\repo\classes\slider;
 use App\Services\repo\classes\tag;
@@ -32,6 +33,7 @@ use App\Services\repo\interfaces\currencyInterface;
 use App\Services\repo\interfaces\pageInterface;
 use App\Services\repo\interfaces\productInterface;
 use App\Services\repo\interfaces\propertyInterface;
+use App\Services\repo\interfaces\reviewInterface;
 use App\Services\repo\interfaces\roleInterface;
 use App\Services\repo\interfaces\sliderInterface;
 use App\Services\repo\interfaces\tagInterface;
@@ -66,6 +68,7 @@ class repo extends ServiceProvider
         $this->app->bind(userInterface::class,user::class);
         $this->app->bind(wishlistInterface::class,wishlist::class);
         $this->app->bind(cartInterface::class,cart::class);
+        $this->app->bind(reviewInterface::class,review::class);
 
     }
 

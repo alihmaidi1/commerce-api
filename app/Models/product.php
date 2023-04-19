@@ -126,4 +126,12 @@ class product extends Model
         return $this->hasMany(cart::class,"product_id");
 
     }
+
+
+    public function reviews(){
+
+
+        return $this->hasMany(review::class,"product_id");
+
+    }
 }

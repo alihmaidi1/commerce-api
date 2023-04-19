@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\adminController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\imageController;
 use App\Http\Controllers\pageController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\propertyController;
+use App\Http\Controllers\reviewController;
 use App\Http\Controllers\roleController;
 use App\Http\Controllers\sliderController;
 use App\Http\Controllers\tagController;
@@ -96,6 +96,10 @@ Route::group(["middleware"=>"auth:user"],function(){
 
     Route::apiResource("cart",cartController::class);
     Route::put("cart",[cartController::class,"update"]);
+
+
+    Route::apiResource("review",reviewController::class);
+    // Route::put("cart",[cartController::class,"update"]);
 
 
 });
