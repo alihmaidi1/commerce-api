@@ -19,6 +19,7 @@ use App\Http\Controllers\roleController;
 use App\Http\Controllers\sliderController;
 use App\Http\Controllers\tagController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\wishlistController;
 use App\Services\repo\classes\country;
 
 Route::group(["prefix"=>"admin"],function(){
@@ -89,5 +90,7 @@ Route::group(["middleware"=>"auth:user"],function(){
     Route::post("logout",[userController::class,"logout"]);
     Route::post("changepassword",[userController::class,"changepassword"]);
 
+    Route::apiResource("wishlist",wishlistController::class);
+    Route::delete("wishlist",[wishlistController::class,"delete"]);
 
 });

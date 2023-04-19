@@ -32,9 +32,17 @@ class User extends Authenticatable  implements JWTSubject
         return [];
     }
 
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
+    }
+
+    public function wishlist(){
+
+
+        return $this->belongsToMany(product::class,wishlist::class);
+
     }
 
 
