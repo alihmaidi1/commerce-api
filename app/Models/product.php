@@ -120,4 +120,10 @@ class product extends Model
 
 
 
+
+    public function carts(){
+
+        return $this->hasMany(cart::class,"product_id");
+
+    }
 }

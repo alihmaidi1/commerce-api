@@ -6,6 +6,7 @@ use App\Http\Controllers\admin;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\brandController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\cityController;
 use App\Http\Controllers\coponController;
@@ -92,5 +93,9 @@ Route::group(["middleware"=>"auth:user"],function(){
 
     Route::apiResource("wishlist",wishlistController::class);
     Route::delete("wishlist",[wishlistController::class,"delete"]);
+
+    Route::apiResource("cart",cartController::class);
+    Route::put("cart",[cartController::class,"update"]);
+
 
 });

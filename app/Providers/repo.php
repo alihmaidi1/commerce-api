@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\repo\classes\admin;
 use App\Services\repo\classes\banner;
 use App\Services\repo\classes\brand;
+use App\Services\repo\classes\cart;
 use App\Services\repo\classes\category;
 use App\Services\repo\classes\city;
 use App\Services\repo\classes\copon;
@@ -22,6 +23,7 @@ use App\Services\repo\classes\wishlist;
 use App\Services\repo\interfaces\adminInterface;
 use App\Services\repo\interfaces\bannerInterface;
 use App\Services\repo\interfaces\brandInterface;
+use App\Services\repo\interfaces\cartInterface;
 use App\Services\repo\interfaces\categoryInterface;
 use App\Services\repo\interfaces\cityInterface;
 use App\Services\repo\interfaces\coponInterface;
@@ -63,6 +65,7 @@ class repo extends ServiceProvider
         $this->app->bind(coponInterface::class,copon::class);
         $this->app->bind(userInterface::class,user::class);
         $this->app->bind(wishlistInterface::class,wishlist::class);
+        $this->app->bind(cartInterface::class,cart::class);
 
     }
 
